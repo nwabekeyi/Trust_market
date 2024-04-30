@@ -32,9 +32,11 @@ const updateCartItemCount = (count) => {
 
 
       <div className="flex items-center text-white">
+        
+        {/* help dropdown */}
         <div className='flex mr-5 item-center justify-between'>
-        <FiHelpCircle className="ml-2 text-white" />
-        <Dropdown title="Help">
+        <FiHelpCircle className="mx-1 text-white my-auto" />
+        <Dropdown title="Help" className='text-white text-bold ml-5'>
         <Link to="/" className="text-greenDark hover:text-red text-xl">
             Home
           </Link>
@@ -52,8 +54,8 @@ const updateCartItemCount = (count) => {
             <span className="font-md rounded-full pl-5 py-1 text-xs absolute top-0 right-0 -mt-1 -mr-1">
               {cartItemCount}
             </span>
-          )}      
-          
+          )}
+
       </div>
     </nav>
       <nav className=" flex justify-between px-10 items-center bg-white py-4 h-[80px] my-0 ">
