@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Lazy-loaded components
-const HomePage = React.lazy(() => import('./home/HomePage'));
+const Home = React.lazy(() => import('./home'));
 
 const MyRoutes = () => {
   return (
@@ -13,7 +13,7 @@ const MyRoutes = () => {
           path="/"
           element={
             <Suspense fallback={<div>Loading...</div>}>
-              <HomePage />
+              <Home />
             </Suspense>
           }
         />

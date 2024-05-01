@@ -23,11 +23,8 @@ const updateCartItemCount = (count) => {
       </div>
 
       <div className='flex item-center'>
-        <input type='search' className='rounded-md shadow-sm focus:outline-none focus:border border-2 focus:ring-indigo-500 focus:border-greenLight sm:text-sm transition duration-300 hover:border-greenLight w-[300px] px-2 h-[40px]' 
+        <input type='search' className='rounded-3xl shadow-sm focus:outline-none focus:border border-2 focus:ring-indigo-500 focus:border-greenLight sm:text-sm transition duration-300 hover:border-greenLight w-[350px] px-2 h-[30px]' 
       placeholder='Search products, categories and brands' />
-          <Button primary login  >
-                Search
-            </Button>
       </div>
 
 
