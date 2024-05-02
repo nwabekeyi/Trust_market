@@ -16,14 +16,14 @@ export const AboutUs = () => {
 
   const coreValues =[
     { id: 1, name: 'Collaboration', image: collaboration, content:' Together, we harness the strength of teamwork to innovate and grow, fostering diverse perspectives and collective achievements.'},
-    { id: 1, name: 'Integrity', image: efficiency, content:'Honesty and transparency guide our actions, building trust and accountability within our team and with customers, buyers and investors.'},
-    { id: 1, name: 'Efficiency', image: integrity, content:' We prioritize streamlined processes and effective solutions, maximizing productivity and delivering exceptional results with precision and speed.'},
+    { id: 2, name: 'Integrity', image: efficiency, content:'Honesty and transparency guide our actions, building trust and accountability within our team and with customers, buyers and investors.'},
+    { id: 3, name: 'Efficiency', image: integrity, content:' We prioritize streamlined processes and effective solutions, maximizing productivity and delivering exceptional results with precision and speed.'},
   ]
   const team=[
     { id: 1, name: 'Nwabekeyi Chidibere', image: coo, position: 'Chief Operating officer' },
     { id: 2, name: 'Victoria Dike', image: hr, position: 'Human Resource Manager' },
-    { id: 1, name: 'Nwabekeyi Somtochukwu', image: marketing, position: 'Marketing Manager' },
-    { id: 1, name: 'Nwabekeyi Jeremiah', image: financial, position: 'Financial Manager' },
+    { id: 3, name: 'Nwabekeyi Somtochukwu', image: marketing, position: 'Marketing Manager' },
+    { id: 4, name: 'Nwabekeyi Jeremiah', image: financial, position: 'Financial Manager' },
   ]
 
   return (

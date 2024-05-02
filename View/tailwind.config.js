@@ -13,7 +13,8 @@ export default {
        greenLight: '#0E703D',
        brown: "#733400",
        greenLighter: '#B4D7C3',
-       none: 'transparent'
+       none: 'transparent',
+       greyLight: '#F1F1F1'
       },
     },
   },
