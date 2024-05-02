@@ -54,7 +54,6 @@ const Testimonial = () => {
                 spaceBetween={50}
                 slidesPerView={3}
                 onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
                 >
                 {details.map(detail => (
                     <SwiperSlide>
