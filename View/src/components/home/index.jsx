@@ -2,6 +2,7 @@ import HomePageNav from "./HomePageNav";
 import Hero from "./Hero";
 import CategoryHome from "./CategoryHome";
 import ContactHome from "./ContactHome";
+import AboutUs from "./AboutUs";
 
 export const Home = () => {
   return (
@@ -10,6 +11,7 @@ export const Home = () => {
      <Hero />
      <CategoryHome/>
     <ContactHome />
+    <AboutUs />
     </div>
   );
 };

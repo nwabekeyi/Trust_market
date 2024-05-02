@@ -12,6 +12,7 @@ export default {
        grey: '#4A4A4A',
        greenLight: '#0E703D',
        brown: "#733400",
+       greenLighter: '#B4D7C3',
        none: 'transparent'
       },
     },
