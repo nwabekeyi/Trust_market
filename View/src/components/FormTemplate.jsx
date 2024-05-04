@@ -44,6 +44,19 @@ const TextField = ({ label, name, type, ...rest }) => ( // Spread rest props
   </div>
 );
 
+const TextFieldFooter = ({ name, type, ...rest }) => ( // Spread rest props
+  <div {...rest}>
+    
+    <Field
+      type={type}
+      id={name}
+      name={name}
+      className="border-2 border-grey rounded-lg w-full py-2 px-3 text-grey leading-tight focus:outline-none focus:shadow-outline hover:border-red"
+    />
+    <ErrorMessage name={name} component="div" className="text-red text-sm mt-1" />
+  </div>
+);
+
 const TextAreaField = ({ label, name, ...rest }) => ( // Spread rest props
   <div {...rest}>
    <h3>
@@ -70,10 +83,11 @@ const SubmitButton = ({ isSubmitting }) => (
       disabled={isSubmitting}
       primary
       getStarted
+      full
     >
       Submit
     </Button>
   </div>
 );
 
-export { ChildrenPropForm, TextField, TextAreaField };
+export { ChildrenPropForm, TextField, TextAreaField, TextFieldFooter };

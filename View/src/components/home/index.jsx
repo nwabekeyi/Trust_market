@@ -4,6 +4,7 @@ import CategoryHome from "./CategoryHome";
 import ContactHome from "./ContactHome";
 import AboutUs from "./AboutUs";
 import Testimonial from "./Testimonial";
+import Footer from "./Footer";
 
 export const Home = () => {
   return (
@@ -14,6 +15,7 @@ export const Home = () => {
     <ContactHome />
     <AboutUs />
     <Testimonial />
+    <Footer />
     </div>
   );
 };
