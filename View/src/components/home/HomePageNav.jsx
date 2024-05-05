@@ -14,7 +14,7 @@ const navigate = useNavigate();
 
 //handle login navigation
 const handleLoginNav = () =>{
-  navigate('login')
+  navigate('dashboard')
 }
 // Sample function to update the cart item count
 const updateCartItemCount = (count) => {
