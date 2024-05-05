@@ -1,13 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logoSvg from '../../assets/trust_maket.svg';
 import Button from '../Button';
 import { FiSmartphone, FiShoppingCart, FiHelpCircle } from 'react-icons/fi';
 import { useState } from 'react';
 import Dropdown from '../Dropdown';
+import { Navigate } from 'react-router-dom';
+
 
 const HomePageNav = () => {
   const [cartItemCount, setCartItemCount] = useState(0);
 
+const navigate = useNavigate();
+
+//handle login navigation
+const handleLoginNav = () =>{
+  navigate('login')
+}
 // Sample function to update the cart item count
 const updateCartItemCount = (count) => {
   setCartItemCount(count);
@@ -29,7 +37,7 @@ const updateCartItemCount = (count) => {
 
 
       <div className="flex items-center text-white">
-        
+
         {/* help dropdown */}
         <div className='flex mr-5 item-center justify-between'>
         <FiHelpCircle className="mx-1 text-white my-auto" />
@@ -83,10 +91,10 @@ const updateCartItemCount = (count) => {
         </div>
         {/* Register/Login Button */}
         <div>
-          <Link className="text-xl text-greenDark hover:text-red">
+          <Link to= 'register' className="text-xl text-greenDark hover:text-red">
             Register <span className='text-2xl'>/</span>
           </Link>
-            <Button primary login  >
+            <Button onClick={handleLoginNav}primary login  >
                 Login
             </Button>
         </div>
