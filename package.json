@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "A marketplace application",
   "scripts": {
+    "install:frontend": "cd view && npm install",
+    "install:backend": "cd controller && npm install",
+    "install": "concurrently \"npm run install:frontend\" \"npm run install:backend\"",
     "start:frontend": "cd view && npm run dev",
     "start:backend": "cd controller && npm start",
-    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+    "start": "npm run install && concurrently \"npm run start:frontend\" \"npm run start:backend\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^6.5.1"
+    "concurrently": "^6.2.2"
   }
 }
