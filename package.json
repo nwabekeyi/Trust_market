@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "A marketplace application",
   "scripts": {
-    "install:frontend": "cd view && npm install",
-    "install:backend": "cd controller && npm install",
+    "install:frontend": "npm --prefix view install",
+    "install:backend": "npm --prefix controller install",
     "install": "concurrently \"npm run install:frontend\" \"npm run install:backend\"",
-    "start:frontend": "cd view && npm run dev",
-    "start:backend": "cd controller && npm start",
+    "start:frontend": "npm --prefix view run dev",
+    "start:backend": "npm --prefix controller start",
     "start": "npm run install && concurrently \"npm run start:frontend\" \"npm run start:backend\""
   },
   "author": "",
