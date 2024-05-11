@@ -4,13 +4,13 @@
 
 
 body, h1 {
-    font-family: 'Markazi Text', serif;
-  }
+  font-family: 'Montserrat', sans-serif;
+}
 
-  h2, h3, button {
-    font-family: 'Karla', sans-serif;
-  }
+h2, h3, .link {
+  font-family: 'Poppins', sans-serif;
+}
 
   p, h4, h5 {
-    font-family: Arial, sans-serif; 
+    font-family: Arial, sans-serif;
   }

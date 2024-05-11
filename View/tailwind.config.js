@@ -9,6 +9,7 @@ module.exports = withMT({
   theme: {
     extend: {
       colors: {
+        yellow: '#F0B70D',
         buttonActive: '#733400',
        red: '#FF1F00',
        greenDark:'#052C15',
@@ -17,7 +18,7 @@ module.exports = withMT({
        brown: "#733400",
        greenLighter: '#B4D7C3',
        none: 'transparent',
-       greyLight: '#F1F1F1'
+       greyLight: '#403C39',
       },
     },
   },
