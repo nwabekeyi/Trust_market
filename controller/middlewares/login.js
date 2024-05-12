@@ -1,11 +1,11 @@
 require('dotenv').config();
-
 const User = require('../model/dbSchema/User');
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const superadminLogin = async (req, res) => {
+  console.log('login reached')
   const { email, password } = req.body;
 
   try {
