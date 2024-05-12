@@ -5,6 +5,7 @@ import { FiSmartphone, FiShoppingCart, FiHelpCircle } from 'react-icons/fi';
 import { useState } from 'react';
 import Dropdown from '../Dropdown';
 import { Navigate } from 'react-router-dom';
+import { MdOutlineShoppingBag } from "react-icons/md";
 
 
 const HomePageNav = () => {
@@ -12,9 +13,9 @@ const HomePageNav = () => {
 
 const navigate = useNavigate();
 
-//handle login navigation
+// handle login navigation
 const handleLoginNav = () =>{
-  navigate('dashboard')
+  navigate('auth2')
 }
 // Sample function to update the cart item count
 const updateCartItemCount = (count) => {
@@ -51,11 +52,15 @@ const linkStyles = "text-grey hover:text-red text-sm link active:border-b border
         </div>
         {/* Register/Login Button */}
         <div className='flex items-center'>
-          <img src={cart} alt="cart" className='pointer-cursor hover:text-red' />
-          <Link to= 'register' className="text-sm mx-5  text-red hover:text-grey underline">
+        <MdOutlineShoppingBag />
+        <Link to= 'auth1'  className="text-sm mx-5  text-red hover:text-grey underline">
             Sign in
           </Link>
-            <Button onClick={handleLoginNav} primary login  >
+            <Button
+            onClick={handleLoginNav}
+            primary
+            login
+            >
                 Sign up
             </Button>
         </div>

@@ -1,58 +1,59 @@
 import {
-  Card,
-  Input,
   Checkbox,
   Button,
   Typography,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import loginImage from "../../../../assets/login-image.svg"
+import AuthWrapper from "../../layouts/authWrapper";
+import { ChildrenPropForm, TextField} from "../../../FormTemplate"
+import sellerLogin from "../../../../assets/seller-login.webp"
+import { useLocation } from "react-router-dom";
 
 
-export function SignIn() {
-  return (
-    <section className="m-8 flex gap-4">
-      <div className="w-full lg:w-3/5 mt-24">
-        <div className="text-center">
-          <Typography variant="h2" className="font-bold mb-4">Sign In</Typography>
-          <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Enter your email and password to Sign In.</Typography>
-        </div>
-        <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
-          <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
-              Your email
-            </Typography>
-            <Input
-              size="lg"
-              placeholder="name@mail.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-            <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
-              Password
-            </Typography>
-            <Input
-              type="password"
-              size="lg"
-              placeholder="********"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-          </div>
+const SignIncontent = () =>{
+
+  const location = useLocation();
+  return(
+
+
+    <div className="mx-20 flex gap-2 items-center ">
+
+       <div className="w-1/2 h-9/10 hidden lg:block ">
+       <img
+            src={location.pathname === "/auth1/buyer-sign-in" ? loginImage : sellerLogin}
+            className="h-full w-full object-cover rounded-3xl"
+            alt="Login Image"
+          />
+
+      </div>
+      <div className=" h-8/10 lg:w-3/5 mt-2 mx-auto shadow">
+        <div className=" w-[70%] mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+        <div>
+        <h2 className="bold text-xl">LOGIN</h2>
+
+      <ChildrenPropForm
+                    initialValues={{ email: '', password: '' }}
+
+                    title={'Hi, welcome back to the best market place '}
+                 >
+                     {/* Render form fields */}
+                     <TextField label="Email" name="email" type="email" />
+                    <TextField label="Password" name="password" type="password" />
+                    </ChildrenPropForm>
+      </div>
+      <div className="flex items-center justify-between">
           <Checkbox
             label={
               <Typography
                 variant="small"
                 color="gray"
-                className="flex items-center justify-start font-medium"
+                className="flex items-center justify-start text-[12px] "
               >
                 I agree the&nbsp;
                 <a
                   href="#"
-                  className="font-normal text-black transition-colors hover:text-gray-900 underline"
+                  className="text-[12px] text-black transition-colors hover:text-gray-900 underline"
                 >
                   Terms and Conditions
                 </a>
@@ -60,31 +61,15 @@ export function SignIn() {
             }
             containerProps={{ className: "-ml-2.5" }}
           />
-          <Button className="mt-6" fullWidth>
-            Sign In
-          </Button>
 
-          <div className="flex items-center justify-between gap-2 mt-6">
-            <Checkbox
-              label={
-                <Typography
-                  variant="small"
-                  color="gray"
-                  className="flex items-center justify-start font-medium"
-                >
-                  Subscribe me to newsletter
-                </Typography>
-              }
-              containerProps={{ className: "-ml-2.5" }}
-            />
-            <Typography variant="small" className="font-medium text-gray-900">
+            <Typography className="text-[12px]  text-gray-900">
               <a href="#">
-                Forgot Password
+                Forgot Password?
               </a>
             </Typography>
-          </div>
-          <div className="space-y-4 mt-8">
-            <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
+        </div>
+          <div className="space-x-4 mt-8 flex">
+            <button className="flex items-center gap-2 p-2 justify-center shadow-md" fullWidth>
               <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_1156_824)">
                   <path d="M16.3442 8.18429C16.3442 7.64047 16.3001 7.09371 16.206 6.55872H8.66016V9.63937H12.9813C12.802 10.6329 12.2258 11.5119 11.3822 12.0704V14.0693H13.9602C15.4741 12.6759 16.3442 10.6182 16.3442 8.18429Z" fill="#4285F4" />
@@ -98,27 +83,31 @@ export function SignIn() {
                   </clipPath>
                 </defs>
               </svg>
-              <span>Sign in With Google</span>
-            </Button>
-            <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
+              <h2 className="text-[10px]">Sign in With Google</h2>
+            </button>
+            <button   className="flex items-center p-2 gap-2 justify-center shadow-md" fullWidth>
               <img src="/img/twitter-logo.svg" height={24} width={24} alt="" />
-              <span>Sign in With Twitter</span>
-            </Button>
+              <h2 className="text-[10px]">Sign in With Twitter</h2>
+            </button>
           </div>
-          <Typography variant="paragraph" className="text-center text-blue-gray-500 font-medium mt-4">
+          <Typography variant="paragraph" className="text-center text-sm text-blue-grey font-medium mt-4">
             Not registered?
-            <Link to="/auth/sign-up" className="text-gray-900 ml-1">Create account</Link>
+            <Link to="/auth/sign-up" className="text-red text-sm ml-1">Create account</Link>
           </Typography>
-        </form>
+        </div>
 
       </div>
-      <div className="w-2/5 h-full hidden lg:block">
-        <img
-          src="/img/pattern.png"
-          className="h-full w-full object-cover rounded-3xl"
-        />
-      </div>
+    </div>
+  )
+}
 
+const MainSigin = AuthWrapper(SignIncontent)
+
+
+export function SignIn() {
+  return (
+    <section >
+      <MainSigin />
     </section>
   );
 }

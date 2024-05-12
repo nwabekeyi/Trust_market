@@ -2,8 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const connectDB = require('./model/connectDB');
+const superadminLoginRoute = require("./routes/login")
 
 const app = express();
+app.use(express.json());
 const port = 3000;
 
 connectDB();
@@ -23,6 +25,9 @@ app.use(express.static(staticFilesDir));
 app.get('*', (req, res) => {
     res.sendFile(path.join(staticFilesDir, 'index.html'));
 });
+
+//superadmin login API
+app.use(superadminLoginRoute);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

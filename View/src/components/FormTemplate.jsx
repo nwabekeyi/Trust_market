@@ -11,7 +11,7 @@ const ChildrenPropForm = ({ initialValues, validationSchema, onSubmit, title, ch
     >
       {({ isSubmitting }) => (
         <Form className="w-full max-w-sm ">
-          {title && <h3 className='text-sm font-bold text-grey'>{title}</h3>} {/* Render title only if it's provided */}
+          {title && <h2 className='text-xs mb-10 text-grey'>{title}</h2>} {/* Render title only if it's provided */}
 
           {/* Render children dynamically */}
           {React.Children.map(children, child => {
@@ -28,17 +28,16 @@ const ChildrenPropForm = ({ initialValues, validationSchema, onSubmit, title, ch
 
 const TextField = ({ label, name, type, ...rest }) => ( // Spread rest props
   <div {...rest}>
-    <h3>
-    <label htmlFor={name} className="block text-md  text-grey font-semibold">
+    <h1>
+    <label htmlFor={name} className="block text-md  text-grey">
       {label}
     </label>
-    </h3>
+    </h1>
     <Field
       type={type}
       id={name}
       name={name}
-      placeholder={`Enter your ${label.toLowerCase()}`}
-      className="border-2 border-grey rounded-lg w-full py-2 px-3 text-grey leading-tight focus:outline-none focus:shadow-outline hover:border-red"
+      className="border-[1px] blue-gray-200 focus:border-gray-900 focus:border-2 rounded-lg w-full py-2 px-3 text-grey leading-tight focus:outline-none focus:shadow-outline"
     />
     <ErrorMessage name={name} component="div" className="text-red text-sm mt-1" />
   </div>
@@ -77,7 +76,7 @@ const TextAreaField = ({ label, name, ...rest }) => ( // Spread rest props
 );
 
 const SubmitButton = ({ isSubmitting }) => (
-  <div className="flex items-center justify-center mb-4">
+  <h2 className="flex items-center justify-center mb-4 bold py-2">
     <Button
       type="submit"
       disabled={isSubmitting}
@@ -87,7 +86,7 @@ const SubmitButton = ({ isSubmitting }) => (
     >
       Submit
     </Button>
-  </div>
+  </h2>
 );
 
-export { ChildrenPropForm, TextField, TextAreaField, TextFieldFooter };
+export { ChildrenPropForm, TextField, TextAreaField, TextFieldFooter, SubmitButton };

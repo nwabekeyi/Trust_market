@@ -1,4 +1,3 @@
-import logoSvg from '../../assets/logo-white.png';
 import { ChildrenPropForm, TextFieldFooter } from '../FormTemplate'; // Adjust the file path accordingly
 import * as Yup from 'yup';
 import { FaInstagram, FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
@@ -67,7 +66,6 @@ const Footer =  () =>{
     return(
         <section className='bg-black p-[50px] py-2 m-5'>
             <article>
-                <img src={logoSvg} className='w-[350px] h-10' alt="company logo" />
             </article>
             <article className='flex justify-between mt-12'>
              {categories.map((category, index) => (

@@ -6,6 +6,8 @@ const Home = React.lazy(() => import('./home'));
 const SignIn = React.lazy(() => import('./users/pages/auth/sign-in'));
 const SignUp = React.lazy(() => import('./users/pages/auth/sign-up'));
 const Dashboard = React.lazy(() => import('./users/layouts/dashboard'));
+const PreAuthSingIn = React.lazy(() => import('./users/pages/auth/preSignIn'));
+const PreAuthRegister = React.lazy(() => import('./users/pages/auth/preRegistration'));
 
 const MyRoutes = () => {
   return (
@@ -19,11 +21,20 @@ const MyRoutes = () => {
       <Route path="/dashboard/*" element={<Suspense fallback={<div>Loading...</div>}>
               <Dashboard/>
             </Suspense>} />
-      <Route path="register" element={<Suspense fallback={<div>Loading...</div>}>
+      <Route path="auth2/register" element={<Suspense fallback={<div>Loading...</div>}>
               <SignUp />
             </Suspense>} />
-      <Route path="login" element={<Suspense fallback={<div>Loading...</div>}>
+      <Route path="auth1/buyer-sign-in" element={<Suspense fallback={<div>Loading...</div>}>
               <SignIn />
+            </Suspense>} />
+            <Route path="auth1/seller-sign-in" element={<Suspense fallback={<div>Loading...</div>}>
+              <SignIn />
+            </Suspense>} />
+      <Route path="auth1" element={<Suspense fallback={<div>Loading...</div>}>
+              <PreAuthSingIn />
+            </Suspense>} />
+            <Route path="auth2" element={<Suspense fallback={<div>Loading...</div>}>
+              <PreAuthRegister />
             </Suspense>} />
       </Routes>
     </Router>

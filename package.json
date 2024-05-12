@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^6.2.2"
+    "concurrently": "^6.2.2",
+    "crypto": "^1.0.1"
   }
 }
