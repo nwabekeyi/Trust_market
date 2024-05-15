@@ -19,6 +19,7 @@ module.exports = withMT({
        greenLighter: '#B4D7C3',
        none: 'transparent',
        greyLight: '#403C39',
+       greyLighter: '#B0B0B0',
       },
     },
   },

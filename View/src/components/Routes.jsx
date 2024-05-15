@@ -21,7 +21,10 @@ const MyRoutes = () => {
       <Route path="/dashboard/*" element={<Suspense fallback={<div>Loading...</div>}>
               <Dashboard/>
             </Suspense>} />
-      <Route path="auth2/register" element={<Suspense fallback={<div>Loading...</div>}>
+      <Route path="/auth2/buyer-register" element={<Suspense fallback={<div>Loading...</div>}>
+              <SignUp />
+            </Suspense>} />
+      <Route path="/auth2/seller-register" element={<Suspense fallback={<div>Loading...</div>}>
               <SignUp />
             </Suspense>} />
       <Route path="auth1/buyer-sign-in" element={<Suspense fallback={<div>Loading...</div>}>

@@ -36,7 +36,7 @@ const CategoryHome = () => {
 
   return (
   <div >
-   <h1 className='text-greenDark text-5xl font-bold text-center mt-5'>Featured Categories</h1>
+   <h1 className='text-greyLight text-5xl font-light text-center mt-5'>Featured Categories</h1>
    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8 pb-2 ">
      {categories.map(category => (
       <div key={category.id} className=" w-full h-[300px] rounded overflow-hidden shadow-md mx-auto cursor-pointer transform hover:scale-110 transition-all duration-500">
