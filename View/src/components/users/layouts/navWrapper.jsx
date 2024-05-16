@@ -39,13 +39,11 @@ const NavWrapper = (WrappedComponent) => {
 
     return (
       <div>
-        {/* Navbar */}
+        {/* Navbar for homepage */}
         { location === "/"  ?
-        <header>
+        <header className="hidden md:block">
         <nav className=" flex justify-between mx-20  items-center bg-white py-4 h-[80px] my-0 ">
-          {/* Logo */}
           <div className="flex items-center">
-      {/* Logo */}
         <Link to="/" className="text-3xl text-red cursor">Trust <span className="text-yellow">Market</span></Link>
       </div>
           {/* Navigation Links */}
@@ -82,6 +80,7 @@ const NavWrapper = (WrappedComponent) => {
           </div>
       </nav>
       </header>
+      // navbar for authpages
       :
        <div>
        <nav className="flex h-[50px] justify-between shadow items-center bg-white text-white px-10 ">

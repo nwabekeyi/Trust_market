@@ -8,17 +8,19 @@ const SignUp = React.lazy(() => import('./users/pages/auth/sign-up'));
 const Dashboard = React.lazy(() => import('./users/layouts/dashboard'));
 const PreAuthSingIn = React.lazy(() => import('./users/pages/auth/preSignIn'));
 const PreAuthRegister = React.lazy(() => import('./users/pages/auth/preRegistration'));
+const AuthIsloading =  React.lazy(() => import('./isLoading/isLoadingAuth'));
 
+console.log(AuthIsloading)
 const MyRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Suspense fallback={<div>Loading...</div>}>
+        <Route exact path="/" element={<Suspense fallback={<AuthIsloading/>}>
               <Home />
             </Suspense>
           }
         />
-      <Route path="/dashboard/*" element={<Suspense fallback={<div>Loading...</div>}>
+      <Route path="/dashboard/*" element={<Suspense fallback={AuthIsloading}>
               <Dashboard/>
             </Suspense>} />
       <Route path="/auth2/buyer-register" element={<Suspense fallback={<div>Loading...</div>}>

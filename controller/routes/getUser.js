@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getUser, getAllUsers } = require('../middlewares/getUser');
+const { getAllUsers } = require('../middlewares/getUser');
+const verifyToken = require("../middlewares/auth/verifyAccessToken"); // Import verifyToken middleware
 
-
-router.get('/api/v1/users', getAllUsers);
+router.get('/api/v1/users', verifyToken, getAllUsers); // Attach verifyToken middleware before getAllUsers
 
 module.exports = router;

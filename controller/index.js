@@ -2,10 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const connectDB = require('./model/connectDB');
-const superadminLoginRoute = require("./routes/login");
-const verifyToken = require("./middlewares/verifyAccessToken"); // Corrected middleware import
-const allUsers = require("./routes/getUser");
-const getUser = require("./routes/getUserOne");
+const refreshToken = require("./middlewares/auth/refreshToken");
+const {
+    registerAdmin,
+    registerBuyer,
+    registerSeller,
+    allUsers,
+    getUser,
+    loginAdmin,
+    loginBuyer,
+    loginSeller,
+    loginSuperadmin} = require("./routes");
+
+
 
 
 const app = express();
@@ -33,10 +42,21 @@ app.use(express.static(staticFilesDir));
 
 
 // Routes
-app.use(superadminLoginRoute); // Login route
-// app.use(verifyToken()); //verifytoken
+app.use(registerAdmin);
+app.use(registerBuyer);
+app.use(registerSeller);
+app.use(loginAdmin);
+app.use(loginBuyer);
+app.use(loginSeller);
+app.use(loginSuperadmin);
 app.use(allUsers);
 app.use(getUser);
+app.use(refreshToken);
+
+
+
+
+
 
 // app.get(getAllUsers); // Get all users route
 //

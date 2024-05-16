@@ -25,10 +25,10 @@ const SignIncontent = () =>{
 
     <div className="mx-20 flex gap-2 items-center ">
 
-       <div className="w-1/2 h-9/10 hidden lg:block ">
+       <div className="w-1/2 h-full hidden lg:block ">
        <img
             src={location.pathname === "/auth1/buyer-sign-in" ? loginImage : sellerLogin}
-            className="h-full w-full object-cover rounded-3xl"
+            className="h-full w-full object-cover "
             alt="Login Image"
           />
 

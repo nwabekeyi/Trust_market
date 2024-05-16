@@ -10,6 +10,7 @@ import kitchen from '../../assets/kitchen-utensils.jpeg';
 import sports from '../../assets/sports-and-fitness.jpeg';
 import travels from '../../assets/travels.jpeg';
 import games from '../../assets/video-games.jpeg';
+import { Link } from 'react-router-dom';
 
 
 
@@ -35,19 +36,19 @@ const CategoryHome = () => {
   ];
 
   return (
-  <div >
-   <h1 className='text-greyLight text-5xl font-light text-center mt-5'>Featured Categories</h1>
+  <div className='mx-20'>
+   <h1 className='text-grey text-2xl font-light text-center mt-5 '>Featured Categories</h1>
    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8 pb-2 ">
      {categories.map(category => (
-      <div key={category.id} className=" w-full h-[300px] rounded overflow-hidden shadow-md mx-auto cursor-pointer transform hover:scale-110 transition-all duration-500">
+      <div key={category.id} className=" w-full h-[260px] rounded overflow-hidden shadow-md mx-auto cursor-pointer transform hover:scale-110 transition-all duration-500">
         <img className="w-full h-[70%]" src={category.image} alt={category.name} />
         <div className="pt-6 py-4 pb-0">
-          <h2 className="font-bold text-md text-center text-greenDark">{category.name}</h2>
+          <h2 className=" text-sm text-center text-greyLight">{category.name}</h2>
         </div>
       </div>
     ))}
     </div>
-    <h2 className='greenDark text-center font-semibold text-sm hover:text-red cursor-pointer mb-8'>Browse more categories</h2>
+    <Link className='text-greylight flex justify-center  text-sm hover:text-red cursor-pointer mb-8 mt-2'>Browse more categories</Link>
   </div>
   );
 };
