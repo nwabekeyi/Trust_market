@@ -7,7 +7,9 @@ import {
   RectangleStackIcon,
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "./pages/dashboard";
-import { SignIn, SignUp } from "./pages/auth";
+import SignIn from "./pages/auth/sign-in";
+import SignUp from "./pages/auth/sign-up";
+
 
 const icon = {
   className: "w-5 h-5 text-inherit",

@@ -1,5 +1,4 @@
 
-
 export const authenticateUser = async  (apiUrl, method, credentials) =>  {
     try {
       const response = await fetch(apiUrl, {

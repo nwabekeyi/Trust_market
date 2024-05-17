@@ -20,7 +20,7 @@ const MyRoutes = () => {
             </Suspense>
           }
         />
-      <Route path="/dashboard/*" element={<Suspense fallback={AuthIsloading}>
+      <Route path="/dashboard" element={<Suspense fallback={AuthIsloading}>
               <Dashboard/>
             </Suspense>} />
       <Route path="/auth2/buyer-register" element={<Suspense fallback={<div>Loading...</div>}>

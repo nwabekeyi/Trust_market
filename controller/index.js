@@ -12,7 +12,8 @@ const {
     loginAdmin,
     loginBuyer,
     loginSeller,
-    loginSuperadmin} = require("./routes");
+    loginSuperadmin,
+    registerSuperadmin} = require("./routes");
 
 
 
@@ -42,6 +43,7 @@ app.use(express.static(staticFilesDir));
 
 
 // Routes
+app.use(registerSuperadmin);
 app.use(registerAdmin);
 app.use(registerBuyer);
 app.use(registerSeller);

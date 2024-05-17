@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     userName: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     phone_number: { type: String, required: true },
-    confirmPassword: { type: String, required: false},
+    confirmPassword: { type: String, required: true},
     role: { type: String, enum: ['superadmin', 'admin', 'seller', 'buyer'] },
     createdAt: { type: Date, default: Date.now }
 });

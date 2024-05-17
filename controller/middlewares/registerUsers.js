@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 // Helper function to handle registration logic
 const registerUser = async (req, res, role) => {
     const { email, userName, password, confirmPassword, phone_number } = req.body;
+    console.log(req.body);
 
     if (password !== confirmPassword) {
         return res.status(400).json({ error: 'Passwords do not match.' });
@@ -18,6 +19,8 @@ const registerUser = async (req, res, role) => {
 
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedConfirmPassword = await bcrypt.hash(confirmPassword, 10);
+
 
         // Create a new user
         const newUser = new User({
@@ -25,7 +28,8 @@ const registerUser = async (req, res, role) => {
             userName,
             password: hashedPassword,
             phone_number,
-            role
+            role,
+            confirmPassword: hashedConfirmPassword
         });
 
         await newUser.save();
@@ -44,6 +48,8 @@ const registerUser = async (req, res, role) => {
 const registerSeller = (req, res) => registerUser(req, res, 'seller');
 const registerBuyer = (req, res) => registerUser(req, res, 'buyer');
 const registerAdmin = (req, res) => registerUser(req, res, 'admin');
+const registerSuperadmin = (req, res) => registerUser(req, res, 'admin');
 
-module.exports = { registerAdmin, registerBuyer, registerSeller };
+
+module.exports = { registerAdmin, registerBuyer, registerSeller, registerSuperadmin};
 

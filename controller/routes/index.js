@@ -1,6 +1,7 @@
 const registerBuyer = require("./registerBuyer");
 const registerSeller = require("./registerSeller");
 const registerAdmin = require("./registerAdmin");
+const registerSuperadmin = require("./registerSuperadmin");
 const allUsers = require("./getUser");
 const getUser = require("./getUserOne");
 const loginAdmin = require("./loginAdmin");
@@ -21,4 +22,5 @@ module.exports = {
     loginAdmin,
     loginBuyer,
     loginSeller,
-    loginSuperadmin};
+    loginSuperadmin,
+    registerSuperadmin};

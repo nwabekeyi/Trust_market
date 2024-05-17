@@ -14,9 +14,9 @@ const loginUser = async (req, res, role) => {
     }
 
     // Find the user by email and role
-    const user = await User.findOne({ email, role });
+    const user = await User.findOne({ email});
 
-    if (!user) {
+    if (!user || (user.role !== role && user.role !== 'admin' && user.role !== 'superadmin')) {
       return res.status(401).json({ message: 'Invalid email, password, or role' });
     }
 

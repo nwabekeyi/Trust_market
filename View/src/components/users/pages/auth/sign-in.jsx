@@ -3,20 +3,22 @@ import loginImage from "../../../../assets/login-image.svg"
 import NavWrapper from "../../layouts/navWrapper";
 import { ChildrenPropForm, TextField} from "../../../FormTemplate"
 import sellerLogin from "../../../../assets/seller-login.webp"
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 
 
 const SignIncontent = () =>{
 
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Full Name is required'),
-    password: Yup.string().email('Invalid email').required('Email is required'),
+    email: Yup.string().required('Email is required'),
+    password: Yup.string().required('password is required'),
   });
 
   const handleSubmit = (values, { setSubmitting }) => {
     // Handle form submission logic here
-    console.log(values);
+    navigate('/dashboard');
     setSubmitting(false);
   };
   const location = useLocation();
