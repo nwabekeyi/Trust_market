@@ -1,9 +1,8 @@
 import { FiGlobe } from "react-icons/fi";
 import { IoIosHelpCircle } from "react-icons/io";
 import { useLocation } from 'react-router-dom';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import Button from '../../Button';
-import { FiSmartphone, FiShoppingCart, FiHelpCircle } from 'react-icons/fi';
 import { useState } from 'react';
 import Dropdown from '../../Dropdown';
 import { Navigate } from 'react-router-dom';
@@ -15,15 +14,15 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 const NavWrapper = (WrappedComponent) => {
   // Return a functional component
   return function WithNavbarWrapper({ SignUp, ...props}) {
+    const[isActive, setIsActive] = useState('/');
+    const [cartItemCount, setCartItemCount] = useState(0);
     const path = useLocation("/auth1");
 
     const location = path.pathname
 
     console.log(location)
-    const [cartItemCount, setCartItemCount] = useState(0);
 
     const navigate = useNavigate();
-    
     // handle login navigation
     const handleLoginNav = () =>{
       navigate('auth2')
@@ -33,8 +32,10 @@ const NavWrapper = (WrappedComponent) => {
       setCartItemCount(count);
     
     };
-    const linkStyles = "text-grey hover:text-red text-sm link active:border-b border-red";
-
+    const linkStyles = ({isActive}) => ( isActive ? "text-grey hover:border-b-2 hover:border-b-red hover:text-red text-sm link active:border-b border-red" : "text-grey hover:text-red text-sm link active:border-b border-red")
+    const handleActive = ()=> {
+      setIsActive
+    }
     // Render the wrapped component along with the navbar
 
     return (
@@ -44,25 +45,28 @@ const NavWrapper = (WrappedComponent) => {
         <header className="hidden md:block">
         <nav className=" flex justify-between mx-20  items-center bg-white py-4 h-[80px] my-0 ">
           <div className="flex items-center">
-        <Link to="/" className="text-3xl text-red cursor">Trust <span className="text-yellow">Market</span></Link>
+        <NavLink to="/" className="text-3xl text-red cursor">Trust <span className="text-yellow">Market</span></NavLink>
       </div>
           {/* Navigation Links */}
           <div className="flex space-x-[-50px] pr-2 pl-10 justify-evenly flex-grow">
-            <Link to="/" className={linkStyles}>
+            <NavLink to="/" className={linkStyles}>
               Home
-            </Link>
-            <Link to="/about" className={linkStyles}>
-              Shop/Sell
-            </Link>
-            <Link to="/contact" className={linkStyles}>
+            </NavLink>
+            <NavLink to="/about" className={linkStyles}>
+              categories
+            </NavLink>
+            <NavLink to="/contact" className={linkStyles}>
+              Shop
+            </NavLink>
+          <NavLink to="/contact" className={linkStyles}>
+             sell
+            </NavLink>
+            <NavLink to="/contact" className={linkStyles}>
+              About
+            </NavLink>
+            <NavLink to="/contact" className={linkStyles}>
               Contact
-            </Link>
-          <Link to="/contact" className={linkStyles}>
-              About Us
-            </Link>
-            <Link to="/contact" className={linkStyles}>
-              Blog
-            </Link>
+            </NavLink>
           </div>
           {/* Register/Login Button */}
           <div className='flex items-center'>

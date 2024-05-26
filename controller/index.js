@@ -1,46 +1,49 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const connectDB = require('./model/connectDB');
-const refreshToken = require("./middlewares/auth/refreshToken");
 const {
     registerAdmin,
     registerBuyer,
     registerSeller,
-    allUsers,
-    getUser,
     loginAdmin,
     loginBuyer,
     loginSeller,
     loginSuperadmin,
-    registerSuperadmin} = require("./routes");
-
-
-
+    registerSuperadmin,
+    refreshToken,
+    logoutUser,
+    getUser,
+    getAllUser} = require("./routes");
 
 const app = express();
 const port = 5000;
 
-
 connectDB();
 
 // cors middleware
+// Define allowed origins
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://trust-market-frontend.vercel.app/'
+];
+
+// Configure CORS middleware
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: allowedOrigins
 }));
 
 // Parse JSON bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // Specify the path to the directory containing the static files
 const staticFilesDir = path.join(__dirname, '../view/dist');
 
 // Serve static files from the directory containing index.html
 app.use(express.static(staticFilesDir));
-
-// Route to serve the index.html file
-
 
 // Routes
 app.use(registerSuperadmin);
@@ -51,17 +54,13 @@ app.use(loginAdmin);
 app.use(loginBuyer);
 app.use(loginSeller);
 app.use(loginSuperadmin);
-app.use(allUsers);
-app.use(getUser);
 app.use(refreshToken);
+app.use(logoutUser);
+app.use(getAllUser);
+app.use(getUser);
 
 
-
-
-
-
-// app.get(getAllUsers); // Get all users route
-//
+// Route to serve the index.html file
 app.get('*', (req, res) => {
     res.sendFile(path.join(staticFilesDir, 'index.html'));
 });

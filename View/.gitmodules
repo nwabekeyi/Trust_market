@@ -1,0 +1,3 @@
+[submodule "view/node_modules/trust_market"]
+	path = view/node_modules/trust_market
+	url = https://github.com/nwabekeyi/Trust_market_frontend.git
