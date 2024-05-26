@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const proxy = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware'); // Import createProxyMiddleware function
 const connectDB = require('./model/connectDB');
 const {
     registerAdmin,
@@ -53,7 +53,7 @@ app.use(getAllUser);
 app.use(getUser);
 
 // Proxy requests to frontend for non-API routes
-app.use('*', proxy({
+app.use('*', createProxyMiddleware({
     target: 'https://trust-market-frontend.vercel.app',
     changeOrigin: true
 }));
