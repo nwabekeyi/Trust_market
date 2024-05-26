@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const proxy = require('http-proxy-middleware');
 const connectDB = require('./model/connectDB');
 const {
     registerAdmin,
@@ -23,13 +24,11 @@ const port = 5000;
 connectDB();
 
 // CORS middleware
-// Define allowed origins
 const allowedOrigins = [
     'http://localhost:5173',
     'https://trust-market-frontend.vercel.app'
 ];
 
-// Configure CORS middleware
 app.use(cors({
     origin: allowedOrigins
 }));
@@ -53,10 +52,11 @@ app.use(logoutUser);
 app.use(getAllUser);
 app.use(getUser);
 
-// Handle 404 Not Found
-app.use((req, res, next) => {
-    res.status(404).sendFile(__dirname + '/error404.html');
-});
+// Proxy requests to frontend for non-API routes
+app.use('*', proxy({
+    target: 'https://trust-market-frontend.vercel.app',
+    changeOrigin: true
+}));
 
 // Start the server
 app.listen(port, () => {
