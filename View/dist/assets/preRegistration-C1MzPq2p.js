@@ -1,1 +1,0 @@
-import{j as r}from"./index-BfvbAsyn.js";import{P as o}from"./preAuth-D0Lq9pi0.js";import"./navWrapper-B49hFv9j.js";import"./index-YZ-OTc40.js";const p=t=>(console.log(t),r.jsx("div",{children:r.jsx(o,{})}));export{p as default};

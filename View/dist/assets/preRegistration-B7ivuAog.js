@@ -1,0 +1,1 @@
+import{j as r}from"./index-B-lNJ8AO.js";import{P as o}from"./preAuth-D0nIiBLV.js";import"./navWrapper-Cszt3H0C.js";import"./index-D7j4bEtQ.js";const p=t=>(console.log(t),r.jsx("div",{children:r.jsx(o,{})}));export{p as default};

@@ -1,1 +1,0 @@
-import{j as r}from"./index-BfvbAsyn.js";import{P as t}from"./preAuth-D0Lq9pi0.js";import"./navWrapper-B49hFv9j.js";import"./index-YZ-OTc40.js";const n=()=>(console.log(),r.jsx("div",{children:r.jsx(t,{signIn:!0})}));export{n as PreAuthSign,n as default};

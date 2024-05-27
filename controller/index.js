@@ -40,7 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Specify the path to the directory containing the static files
-const staticFilesDir = path.join(__dirname, '../view/dist');
+const staticFilesDir = path.join(__dirname, '../View/dist');
 
 // Serve static files from the directory containing index.html
 app.use(express.static(staticFilesDir));
