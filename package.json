@@ -3,12 +3,7 @@
   "version": "1.0.0",
   "description": "A marketplace application",
   "scripts": {
-    "install:frontend": "npm --prefix view install",
-    "install:backend": "npm --prefix controller install",
-    "install": "concurrently \"npm run install:frontend\" \"npm run install:backend\"",
-    "start:frontend": "npm --prefix view run dev",
-    "start:backend": "npm --prefix controller start",
-    "start": "npm run install && concurrently \"npm run start:frontend\" \"npm run start:backend\""
+    "start": "cd controller && npm install; cd .../View && npm install && vite build"
   },
   "author": "",
   "license": "ISC",
