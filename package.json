@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A marketplace application",
   "scripts": {
-    "start": "cd controller && npm install; cd .../View && npm install && vite build"
+    "build": "cd controller && npm install && cd ../View && npm install && npm run build",
+    "start": "cd controller && node index.js"
   },
   "author": "",
   "license": "ISC",
