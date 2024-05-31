@@ -13,7 +13,6 @@ export const HomeSample = () => {
     <div>
      <Hero />
      <CategoryHome/>
-    <Footer />
     </div>
   );
 };

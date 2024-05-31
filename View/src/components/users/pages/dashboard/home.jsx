@@ -27,7 +27,7 @@ import {
 } from "../../data";
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
 
-export function Home() {
+export function DashboardHome() {
   
   return (
     <div className="mt-12">
@@ -37,9 +37,7 @@ export function Home() {
             key={title}
             {...rest}
             title={title}
-            icon={React.createElement(icon, {
-              className: "w-6 h-6 text-white",
-            })}
+            // icon={yyt}
             footer={
               <Typography className="font-normal text-blue-gray-600">
                 <strong className={footer.color}>{footer.value}</strong>
@@ -256,4 +254,4 @@ export function Home() {
   );
 }
 
-export default Home;
+export default DashboardHome;

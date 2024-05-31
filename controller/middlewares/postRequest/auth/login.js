@@ -7,6 +7,8 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const loginUser = async (req, res, role) => {
   const { email, password } = req.body;
+  const expiresIn = 900; // 15 minutes in seconds
+
 
   try {
     if (!email || !password) {
@@ -17,11 +19,11 @@ const loginUser = async (req, res, role) => {
     let user = null;
 
     if (role === 'buyer') {
-      user = await Buyer.findOne({ email });
+      user = await Buyer.findOne({ email});
     } else if (role === 'seller') {
-      user = await Seller.findOne({ email });
+      user = await Seller.findOne({ email});
     } else {
-      user = await Admin.findOne({ email });
+      user = await Admin.findOne({ email});
     }
 
     console.log(user);
@@ -36,7 +38,7 @@ const loginUser = async (req, res, role) => {
       return res.status(401).json({ message: 'Invalid email, password, or role' });
     }
 
-    const accessToken = jwt.sign({ email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '15m' });
+    const accessToken = jwt.sign({ email: user.email, role: user.role }, JWT_SECRET, { expiresIn });
     const refreshToken = jwt.sign({ email: user.email }, JWT_SECRET);
 
     // Store the refresh token in the database
@@ -51,7 +53,7 @@ const loginUser = async (req, res, role) => {
       maxAge: 10 * 365 * 24 * 60 * 60 * 1000 // 10 years
     });
 
-    res.json({ accessToken });
+    res.json({  accessToken, expiresIn, userId: user._id });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });

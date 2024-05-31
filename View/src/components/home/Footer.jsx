@@ -64,16 +64,14 @@ const Footer =  () =>{
       ];
 
     return(
-        <section className='bg-black p-[50px] py-2 m-5'>
-            <article>
-            </article>
-            <article className='flex justify-between mt-12'>
+        <section className='hidden lg:block bg-black p-[50px] py-2 '>
+            <article className='flex lg:flex justify-between mt-12'>
              {categories.map((category, index) => (
-             <div key={index}>
-                <h2 className='text-greyLight text-xl font-bold mb-4 '>{category.title}</h2>
+             <div  key={index}>
+                <h2 className='text-greyLighter text-md lg:text-xl font-bold mb-1  lg:mb-4 '>{category.title}</h2>
                     <ul className='text-white'>
                     {category.items.map((item, i) => (
-                        <p><li key={i} className='text-greyLight text-xs mt-1 font-weight-[light] hover:text-red cursor-pointer duration-200'>{item}</li> </p>
+                        <p><li key={i} className='text-greyLighter text-[8px] lg:text-xs mt-1 font-weight-[light] hover:text-red cursor-pointer duration-200'>{item}</li> </p>
                         ))}
                     </ul>
             </div>
@@ -94,7 +92,7 @@ const Footer =  () =>{
             </div>
       </article>
             <article>
-            <h2 className='text-greyLight flex justify-center relative top-[-35px]'><span className='text-red font-bold text-sm mr-1'>Follow us:</span>
+            <h2 className='text-greyLighter flex justify-center relative top-[-35px]'><span className='text-red font-bold text-sm mr-1'>Follow us:</span>
                 <FaInstagram size={18} style={{display:'inline', marginRight:"5px"}} />
                 <FaFacebook size={18} style={{display:'inline', marginRight:"5px"}}  />
                 <FaLinkedin size={18} style={{display:'inline', marginRight:"5px"}}  />
@@ -105,9 +103,9 @@ const Footer =  () =>{
             </article>
             <hr />
 
-            <article className='text-center text-greyLight'>
-                <p className='text-xs'>@Copyright 2024</p>
-                <h1>All right reserved. Powered by Trust market</h1>
+            <article className='text-center text-greyLighter mt-2'>
+                <p className='text-[8px]'>@Copyright 2024</p>
+                <h1 className='text-xs'>All right reserved. Powered by Trust market</h1>
             </article>
         </section>
     )

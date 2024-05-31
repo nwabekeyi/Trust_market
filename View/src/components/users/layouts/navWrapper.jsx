@@ -7,8 +7,8 @@ import { useState } from 'react';
 import Dropdown from '../../Dropdown';
 import { Navigate } from 'react-router-dom';
 import { MdOutlineShoppingBag } from "react-icons/md";
-
-
+import MobileNavbar from "../../mobileNav";
+import Footer from "../../home/Footer";
 
 // Define the higher-order component
 const NavWrapper = (WrappedComponent) => {
@@ -32,7 +32,7 @@ const NavWrapper = (WrappedComponent) => {
       setCartItemCount(count);
     
     };
-    const linkStyles = ({isActive}) => ( isActive ? "text-grey hover:border-b-2 hover:border-b-red hover:text-red text-sm link active:border-b border-red" : "text-grey hover:text-red text-sm link active:border-b border-red")
+    const linkStyles = ({isActive}) => ( isActive ? "text-grey hover:border-b-2 hover:border-b-red hover:text-red hover:border-b-red hover:border-b-solid hover:border-b-5 text-sm link active:border-b border-red" : "text-grey hover:text-red text-sm link active:border-b border-red")
     const handleActive = ()=> {
       setIsActive
     }
@@ -40,15 +40,17 @@ const NavWrapper = (WrappedComponent) => {
 
     return (
       <div>
-        {/* Navbar for homepage */}
+
         { location === "/"  ?
-        <header className="hidden md:block">
-        <nav className=" flex justify-between mx-20  items-center bg-white py-4 h-[80px] my-0 ">
+        <div>
+        {/* <MobileNav /> */}
+        <header className="hidden lg:block">
+        <nav className=" flex justify-between items-center bg-white py-4  lg:px-[30px] h-[80px] my-0 ">
           <div className="flex items-center">
         <NavLink to="/" className="text-3xl text-red cursor">Trust <span className="text-yellow">Market</span></NavLink>
       </div>
           {/* Navigation Links */}
-          <div className="flex space-x-[-50px] pr-2 pl-10 justify-evenly flex-grow">
+          <div className="flex space-x-[-50px] justify-evenly flex-grow">
             <NavLink to="/" className={linkStyles}>
               Home
             </NavLink>
@@ -59,7 +61,7 @@ const NavWrapper = (WrappedComponent) => {
               Shop
             </NavLink>
           <NavLink to="/contact" className={linkStyles}>
-             sell
+             Sell
             </NavLink>
             <NavLink to="/contact" className={linkStyles}>
               About
@@ -84,6 +86,11 @@ const NavWrapper = (WrappedComponent) => {
           </div>
       </nav>
       </header>
+      {/* mobile nav */}
+      <MobileNavbar className="px-5" />
+      </div>
+
+
       // navbar for authpages
       :
        <div>
@@ -108,9 +115,10 @@ const NavWrapper = (WrappedComponent) => {
         </div>
   }
         {/* Render the wrapped component */}
-        <div className="container mx-auto py-4">
+        <div className="container mx-auto py-4 px-5 lg:px-[30px]">
           <WrappedComponent {...props} />
         </div>
+        <Footer/>
       </div>
     );
   };

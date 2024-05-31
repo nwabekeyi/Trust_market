@@ -1,22 +1,30 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import DashboardHome  from './users/pages/dashboard/home';
+
 
 // Lazy-loaded components
-const Home = React.lazy(() => import('./home'));
+const MainHome = React.lazy(() => import('./home'));
 const SignIn = React.lazy(() => import('./users/pages/auth/sign-in'));
 const SignUp = React.lazy(() => import('./users/pages/auth/sign-up'));
 const Dashboard = React.lazy(() => import('./users/layouts/dashboard'));
 const PreAuthSingIn = React.lazy(() => import('./users/pages/auth/preSignIn'));
 const PreAuthRegister = React.lazy(() => import('./users/pages/auth/preRegistration'));
 const AuthIsloading =  React.lazy(() => import('./isLoading/isLoadingAuth'));
+const DashboardHome =  React.lazy(() => import('./users/pages/dashboard/home'))
 
-console.log(AuthIsloading)
+
 const MyRoutes = () => {
   return (
     <Router>
       <Routes>
+      <Route exact path="/dashboard/home" element={<Suspense fallback={<AuthIsloading/>}>
+              <DashboardHome />
+            </Suspense>
+          }
+        />       
         <Route exact path="/" element={<Suspense fallback={<AuthIsloading/>}>
-              <Home />
+              <MainHome />
             </Suspense>
           }
         />
