@@ -3,7 +3,7 @@ import { IoIosHelpCircle } from "react-icons/io";
 import { useLocation } from 'react-router-dom';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import Button from '../../Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Dropdown from '../../Dropdown';
 import { Navigate } from 'react-router-dom';
 import { MdOutlineShoppingBag } from "react-icons/md";
@@ -17,6 +17,16 @@ const NavWrapper = (WrappedComponent) => {
     const[isActive, setIsActive] = useState('/');
     const [cartItemCount, setCartItemCount] = useState(0);
     const path = useLocation("/auth1");
+    const[isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(()=>{
+      const token = localStorage.getItem('accessToken');
+      console.log(token)
+      if(token){
+        setIsLoggedIn(true);
+      }
+  
+    }, [])
 
     const location = path.pathname
 
@@ -36,12 +46,19 @@ const NavWrapper = (WrappedComponent) => {
     const handleActive = ()=> {
       setIsActive
     }
-    // Render the wrapped component along with the navbar
-
+    const sellRoute = isLoggedIn ? "/dashboard" : "auth1/seller-sign-in";
+    const buyRoute = isLoggedIn ? "/dashboard" : "/auth1/buyer-sign-in";
     return (
       <div>
 
-        { (location === "/" || location === "/home")  ?
+        { (
+          location === "/"
+          || location === "/home"
+          || location === "/about"
+          || location === "/contact"
+          || location === "/categories"
+        )
+        ?
         <div>
         {/* <MobileNav /> */}
         <header className="hidden lg:block">
@@ -51,19 +68,19 @@ const NavWrapper = (WrappedComponent) => {
       </div>
           {/* Navigation Links */}
           <div className="flex space-x-[-50px] justify-evenly flex-grow">
-            <NavLink to="/" className={linkStyles}>
+            <NavLink to="/home" className={linkStyles}>
               Home
             </NavLink>
-            <NavLink to="/about" className={linkStyles}>
+            <NavLink to="/categories" className={linkStyles}>
               categories
             </NavLink>
-            <NavLink to="/contact" className={linkStyles}>
+            <NavLink to={buyRoute} className={linkStyles}>
               Shop
             </NavLink>
-          <NavLink to="/contact" className={linkStyles}>
+          <NavLink to={sellRoute} className={linkStyles}>
              Sell
             </NavLink>
-            <NavLink to="/contact" className={linkStyles}>
+            <NavLink to="/about" className={linkStyles}>
               About
             </NavLink>
             <NavLink to="/contact" className={linkStyles}>
@@ -115,7 +132,7 @@ const NavWrapper = (WrappedComponent) => {
         </div>
   }
         {/* Render the wrapped component */}
-        <div className="container mx-auto py-4 px-5 lg:px-[30px]">
+        <div className="container mx-auto py-4 px-5 md:px-0 lg:px-[10px]">
           <WrappedComponent {...props} />
         </div>
         <Footer/>

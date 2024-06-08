@@ -37,10 +37,10 @@ const CategoryHome = () => {
 
   return (
   <div >
-   <h1 className='not-footer text-grey text-xs lg:text-2xl font-light text-center mt-5 mb-5 '>Featured Categories</h1>
+   <h1 className='text-grey text-xs md:text-lg lg:text-2xl font-light text-center mt-5 mb-5 '>Featured Categories</h1>
    <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8  ">
      {categories.map(category => (
-      <div key={category.id} className=" w-full h-[95px] lg:h-[260px] rounded overflow-hidden shadow-md mx-auto cursor-pointer transform hover:scale-110 transition-all duration-500">
+      <div key={category.id} className=" w-full h-[auto]  rounded overflow-hidden shadow-md mx-auto cursor-pointer transform hover:scale-110 transition-all duration-500">
         <img className="w-full h-[70%] lg:h-[80%]" src={category.image} alt={category.name} />
         <div className="pt-2  lg:pt-3 lg:py-4 lg:pb-0 ">
           <h2 className=" text-[8px] lg:text-[1em] text-center text-greyLight">{category.name}</h2>
@@ -48,7 +48,7 @@ const CategoryHome = () => {
       </div>
     ))}
     </div>
-    <Link className='text-greylight flex justify-center text-[8px]  lg:text-sm hover:text-red cursor-pointer mt-2'>Browse more categories</Link>
+    <Link to= "/categories" className='text-greylight flex justify-center text-[8px]  lg:text-sm hover:text-red cursor-pointer mt-2'>Browse more categories</Link>
   </div>
   );
 };

@@ -4,10 +4,18 @@ import Button from './Button';
 import {
   Typography
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 const ChildrenPropForm = ({ initialValues, validationSchema, onSubmit, title, title2, login, register, children }) => {
+  const location = useLocation();
+
+  const registerRoute =
+    location.pathname === "/auth1/buyer-sign-in"
+      ? "/auth2/buyer-register"
+      : "/auth2/seller-register";
+
+
   return (
     <Formik
       initialValues={initialValues}
@@ -68,7 +76,7 @@ const ChildrenPropForm = ({ initialValues, validationSchema, onSubmit, title, ti
               :
               <Typography variant="paragraph" className="text-center text-greyLight text-sm font-medium mt-4">
                 Don't have an account?
-                <Link to="/auth/sign-in" className="text-red hover:text-greyLight ml-1">Register</Link>
+                <Link to= {registerRoute} className="text-red hover:text-greyLight ml-1">Register</Link>
               </Typography>
 }
 

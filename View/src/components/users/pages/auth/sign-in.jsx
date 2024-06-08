@@ -1,7 +1,7 @@
 import loginImage from "../../../../assets/login-image.svg"
 import NavWrapper from "../../layouts/navWrapper";
 import { ChildrenPropForm, TextField} from "../../../FormTemplate"
-import sellerLogin from "../../../../assets/seller-login.webp"
+import sellerLogin from "../../../../assets/seller-login.webp";
 import { useLocation} from "react-router-dom";
 import * as Yup from 'yup';
 import useAuth from "../../../utils/services.js/useAuth";
@@ -30,7 +30,7 @@ const SignIncontent = () =>{
 
   
   return(
-    <div className="mx-20 flex gap-2 items-center ">
+    <div className="mx-5 lg:mx-20 flex gap-2 items-center  ">
       <div className="w-1/2 h-full hidden lg:block ">
         <img
           src={location.pathname === "/auth1/buyer-sign-in" ? loginImage : sellerLogin}
@@ -38,8 +38,8 @@ const SignIncontent = () =>{
           alt="Login Image"
         />
       </div>
-      <div className="h-8/10 lg:w-3/5 mt-2 mx-auto shadow">
-        <div className="w-[70%] mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+      <div className="w-[100vw] h-8/10 lg:w-3/5 mt-2 mx-auto lg:shadow">
+        <div className="w-[100%] mb-2 mx-auto  max-w-screen-lg lg:w-1/2">
           <div>
             <h2 className="bold text-xl">LOGIN</h2>
             <ChildrenPropForm

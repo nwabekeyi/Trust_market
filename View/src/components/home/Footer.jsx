@@ -111,7 +111,7 @@ const Footer =  () =>{
             </article>
       </section>
 
-      <MobileFooter />
+      <MobileFooter className="absolute" />
     </div>
     )
 }

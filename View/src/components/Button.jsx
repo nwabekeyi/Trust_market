@@ -5,7 +5,7 @@ const Button = ({ primary, children, onClick, login, getStarted, full, ...props 
       : 'bg-gray-500 hover:bg-gray-100'
   } ${
     login
-      ? 'px-6 py-3 ml-1 rounded-xl text-sm'
+      ? 'px-4 py-2 md:px-6 md:py-3 ml-1 rounded-xl text-sm'
       :full ? 'w-full py-2 '
       :getStarted
       ? 'block px-8 py-2 bg-red'

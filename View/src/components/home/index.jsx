@@ -1,10 +1,8 @@
 import Hero from "./Hero";
 import CategoryHome from "./CategoryHome";
-import ContactHome from "./ContactHome";
-import AboutUs from "./AboutUs";
-import Testimonial from "./Testimonial";
-import Footer from "./Footer";
+import ContactHome from "./ContactHome";import Testimonial from "./Testimonial";
 import AuthWrapper from "../users/layouts/navWrapper";
+import BestSelling from "./bestSelling";
 
 export const HomeSample = () => {
 
@@ -13,6 +11,7 @@ export const HomeSample = () => {
     <div>
      <Hero />
      <CategoryHome/>
+     <BestSelling />
     </div>
   );
 };

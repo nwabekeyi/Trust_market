@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import DashboardHome  from './users/pages/dashboard/home';
+
 
 
 // Lazy-loaded components
@@ -12,6 +12,10 @@ const PreAuthSingIn = React.lazy(() => import('./users/pages/auth/preSignIn'));
 const PreAuthRegister = React.lazy(() => import('./users/pages/auth/preRegistration'));
 const AuthIsloading =  React.lazy(() => import('./isLoading/isLoadingAuth'));
 const DashboardHome =  React.lazy(() => import('./users/pages/dashboard/home'))
+const ContactHome =  React.lazy(() => import('./home/ContactHome'))
+const AboutUs =  React.lazy(() => import('./home/AboutUs'))
+const Category =  React.lazy(() => import('./home/categoriesPage'))
+
 
 
 const MyRoutes = () => {
@@ -38,6 +42,8 @@ const MyRoutes = () => {
             </Suspense>
           }
         />
+        <Route exact path="/home" element={isLoggedIn ? <Dashboard/> : <MainHome/>} />
+
       <Route path="/dashboard" element={<Suspense fallback={AuthIsloading}>
               <Dashboard/>
             </Suspense>} />
@@ -58,6 +64,15 @@ const MyRoutes = () => {
             </Suspense>} />
             <Route path="/auth2" element={<Suspense fallback={<div>Loading...</div>}>
               <PreAuthRegister />
+            </Suspense>} />
+            <Route path="/about" element={<Suspense fallback={<div>Loading...</div>}>
+              <AboutUs />
+            </Suspense>} />
+            <Route path="/contact" element={<Suspense fallback={<div>Loading...</div>}>
+              <ContactHome />
+            </Suspense>} />
+            <Route path="/categories" element={<Suspense fallback={<div>Loading...</div>}>
+              <Category />
             </Suspense>} />
       </Routes>
     </Router>

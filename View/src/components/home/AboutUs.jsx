@@ -7,12 +7,13 @@ import collaboration from '../../assets/collaboration-logo.png';
 import efficiency from '../../assets/efficiency-logo.png';
 import integrity from '../../assets/integrity-logo.png';
 import aboutp from '../../assets/about-pix.png';
+import NavWrapper from '../users/layouts/navWrapper';
 
 
 
 
 
-export const AboutUs = () => {
+export const Component = () => {
 
   const coreValues =[
     { id: 1, name: 'Collaboration', image: collaboration, content:' Together, we harness the strength of teamwork to innovate and grow, fostering diverse perspectives and collective achievements.'},
@@ -84,5 +85,7 @@ export const AboutUs = () => {
     </section>
   );
 };
+
+const AboutUs = NavWrapper(Component);
 
 export default AboutUs;

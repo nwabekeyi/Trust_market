@@ -1,4 +1,4 @@
-import "./Auth.css"
+import "./isLoading.css"
 import NavWrapper from "../users/layouts/navWrapper";
 
 const isLoading = () => {

@@ -4,6 +4,7 @@ import chatAI from '../../assets/chatAI.svg';
 import Button from '../Button';
 import { ChildrenPropForm, TextField, TextAreaField } from '../FormTemplate'; // Adjust the file path accordingly
 import * as Yup from 'yup';
+import NavWrapper from '../users/layouts/navWrapper';
 
 const customercareStyle= {
     backgroundImage: `url(${customercare})`, // Applying the background image
@@ -27,7 +28,7 @@ const validationSchema = Yup.object().shape({
   };
 
 
-export const ContactHome = () => {
+export const Component = () => {
     return (
       <section>
         <div style={customercareStyle}>
@@ -83,5 +84,7 @@ export const ContactHome = () => {
       </section>
     );
   };
+
+  const ContactHome = NavWrapper(Component);
 
   export default ContactHome;
