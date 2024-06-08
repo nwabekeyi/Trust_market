@@ -1,8 +1,11 @@
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./model/connectDB');
+const rateLimit = require('express-rate-limit');
 const {
     registerAdmin,
     registerBuyer,
@@ -15,7 +18,8 @@ const {
     refreshToken,
     logoutUser,
     getUser,
-    getAllUser} = require("./routes");
+    getAllUser
+} = require("./routes");
 
 const app = express();
 const port = 5000;
@@ -29,6 +33,16 @@ const allowedOrigins = [
     'https://trust-market-frontend.vercel.app/'
 ];
 
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    message: 'Too many requests from this IP, please try again after 15 minutes',
+});
+
+// Apply the rate limiter to all requests
+app.use('/api/', apiLimiter);
 // Configure CORS middleware
 app.use(cors({
     origin: allowedOrigins
@@ -64,7 +78,25 @@ app.use(getUser);
 app.get('*', (req, res) => {
     res.sendFile(path.join(staticFilesDir, 'index.html'));
 });
-//localhost
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+
+// Check if the current process is the master process
+if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
+
+    // Fork workers equal to the number of CPU cores
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+
+    // Listen for when a worker exits
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`Worker ${worker.process.pid} died`);
+        // Fork a new worker to replace the one that died
+        cluster.fork();
+    });
+} else {
+    // Worker processes will handle incoming connections
+    app.listen(port, () => {
+        console.log(`Worker ${process.pid} is running on port ${port}`);
+    });
+}

@@ -1,6 +1,7 @@
 import { ChildrenPropForm, TextFieldFooter } from '../FormTemplate'; // Adjust the file path accordingly
 import * as Yup from 'yup';
 import { FaInstagram, FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import MobileFooter from './mobileFooter';
 // import { AiOutlineGooglePlay, AiOutlineApple } from 'react-icons/ai';
 
 const Footer =  () =>{
@@ -64,6 +65,7 @@ const Footer =  () =>{
       ];
 
     return(
+      <div>
         <section className='hidden lg:block bg-black p-[50px] py-2 '>
             <article className='flex lg:flex justify-between mt-12'>
              {categories.map((category, index) => (
@@ -107,7 +109,10 @@ const Footer =  () =>{
                 <p className='text-[8px]'>@Copyright 2024</p>
                 <h1 className='text-xs'>All right reserved. Powered by Trust market</h1>
             </article>
-        </section>
+      </section>
+
+      <MobileFooter />
+    </div>
     )
 }
 

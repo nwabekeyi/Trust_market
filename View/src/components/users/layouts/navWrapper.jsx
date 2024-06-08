@@ -41,7 +41,7 @@ const NavWrapper = (WrappedComponent) => {
     return (
       <div>
 
-        { location === "/"  ?
+        { (location === "/" || location === "/home")  ?
         <div>
         {/* <MobileNav /> */}
         <header className="hidden lg:block">
@@ -73,7 +73,7 @@ const NavWrapper = (WrappedComponent) => {
           {/* Register/Login Button */}
           <div className='flex items-center'>
           <MdOutlineShoppingBag />
-          <Link to= 'auth1'  className="text-sm mx-5  text-red hover:text-grey underline">
+          <Link to= '/auth1'  className="text-sm mx-5  text-red hover:text-grey underline">
               Sign in
             </Link>
               <Button

@@ -1,4 +1,4 @@
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import {
   Navbar,
   Typography,
@@ -25,12 +25,23 @@ import {
   setOpenConfigurator,
   setOpenSidenav,
 } from "../../../../context";
+import  useAuth  from "../../../utils/services.js/useAuth";
+import {endpoints} from "../../../utils/constant"
 
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
+  const{logout} = useAuth();
+// 
+const data = localStorage.getItem('userDetails');
+const parsedData = data ? JSON.parse(data) : null;
+const userName = parsedData?.userDetails?.userName || "Guest";
+
+const handleLogout = () =>{
+  logout()  ;
+}
 
   return (
     <Navbar
@@ -50,16 +61,7 @@ export function DashboardNavbar() {
               fixedNavbar ? "mt-1" : ""
             }`}
           >
-            <Link to={`/${layout}`}>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100"
-              >
-                {layout}
-              </Typography>
-            </Link>
-            <Typography
+            <p>Welcome {userName}</p>            <Typography
               variant="small"
               color="blue-gray"
               className="font-normal"
@@ -83,14 +85,15 @@ export function DashboardNavbar() {
           >
             <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
           </IconButton>
-          <Link to="/auth/sign-in">
+          <Link to='/auth1'>
             <Button
+            onClick={handleLogout}
               variant="text"
               color="blue-gray"
               className="hidden items-center gap-1 px-4 xl:flex normal-case"
             >
               <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
-              Sign In
+              Sign Out
             </Button>
             <IconButton
               variant="text"

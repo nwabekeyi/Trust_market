@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import DashboardHome  from './users/pages/dashboard/home';
 
@@ -15,6 +15,16 @@ const DashboardHome =  React.lazy(() => import('./users/pages/dashboard/home'))
 
 
 const MyRoutes = () => {
+  const[isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(()=>{
+    const token = localStorage.getItem('accessToken');
+    console.log(token)
+    if(token){
+      setIsLoggedIn(true);
+    }
+
+  }, [])
   return (
     <Router>
       <Routes>
@@ -22,9 +32,9 @@ const MyRoutes = () => {
               <DashboardHome />
             </Suspense>
           }
-        />       
+        />
         <Route exact path="/" element={<Suspense fallback={<AuthIsloading/>}>
-              <MainHome />
+              {isLoggedIn ? <Dashboard/> : <MainHome />}
             </Suspense>
           }
         />
@@ -37,16 +47,16 @@ const MyRoutes = () => {
       <Route path="/auth2/seller-register" element={<Suspense fallback={<div>Loading...</div>}>
               <SignUp />
             </Suspense>} />
-      <Route path="auth1/buyer-sign-in" element={<Suspense fallback={<div>Loading...</div>}>
+      <Route path="/auth1/buyer-sign-in" element={<Suspense fallback={<div>Loading...</div>}>
               <SignIn />
             </Suspense>} />
-            <Route path="auth1/seller-sign-in" element={<Suspense fallback={<div>Loading...</div>}>
+            <Route path="/auth1/seller-sign-in" element={<Suspense fallback={<div>Loading...</div>}>
               <SignIn />
             </Suspense>} />
-      <Route path="auth1" element={<Suspense fallback={<div>Loading...</div>}>
+      <Route path="/auth1" element={<Suspense fallback={<div>Loading...</div>}>
               <PreAuthSingIn />
             </Suspense>} />
-            <Route path="auth2" element={<Suspense fallback={<div>Loading...</div>}>
+            <Route path="/auth2" element={<Suspense fallback={<div>Loading...</div>}>
               <PreAuthRegister />
             </Suspense>} />
       </Routes>

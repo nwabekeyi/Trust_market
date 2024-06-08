@@ -9,7 +9,7 @@ import { endpoints } from "../../../utils/constant";
 
 const SignIncontent = () =>{
   const location = useLocation();
-  const { login } = useAuth(); // Access the login function from the useAuth hook
+  const { login } = useAuth();
   const apiURL = location.pathname === "/auth1/buyer-sign-in" ? endpoints.buyerLogin : endpoints.sellerLogin ;
   console.log(apiURL)
 

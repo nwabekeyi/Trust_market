@@ -38,6 +38,7 @@ const deleteCookie = (name) => {
 
 const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const[data, setData] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,7 +67,6 @@ const useAuth = () => {
   
       const data = await response.json();
       const { accessToken, refreshToken, expiresIn, userId } = data; // Include userId in the response
-      console.log(data)
       setAccessTokenLocalStorage(accessToken, expiresIn);
       setRefreshTokenCookie(refreshToken);
   
@@ -82,21 +82,18 @@ const useAuth = () => {
   
 //fetch user details
 const fetchUserInfo = useCallback(async (userId) => {
-  const userUrl = endpoints.getUser + '/' + userId;
-  console.log(userUrl)
+  const userUrl = `${endpoints.getUser}/${userId}`;
 
-  
   try {
     const accessToken = getAccessTokenLocalStorage();
     if (!accessToken) {
       throw new Error('Access token not found');
     }
-    console.log('access token gotten')
 
     const userResponse = await fetch(userUrl, {
-      // headers: {
-      //   Authorization: `Bearer ${accessToken}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
 
     if (!userResponse.ok) {
@@ -104,33 +101,23 @@ const fetchUserInfo = useCallback(async (userId) => {
     }
 
     const userData = await userResponse.json();
-    // Handle user info data
-    console.log('User Info:', userData);
+    localStorage.setItem('userDetails', JSON.stringify(userData)); // Ensure JSON.stringify here
+    setData(userData);
+    console.log(userData)
     navigate('/dashboard');
   } catch (error) {
     console.error('Fetch user info error:', error);
   }
 }, [navigate]);
 
-  
 
-  const logout = async () => {
-    try {
-      await fetch('https://your-auth-api.com/logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
+    const logout =  () => {
+      console.log(window.localStorage)
       localStorage.removeItem('accessToken');
       localStorage.removeItem('accessTokenExpiry');
       deleteCookie('refreshToken');
       setIsLoggedIn(false);
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
+  }
 
   const refreshAccessToken = async () => {
     try {

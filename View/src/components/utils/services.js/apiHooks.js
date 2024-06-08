@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 
 // Custom hook for making POST requests
 export const usePostAPI = (url) => {
-  const submit = async (requestData) => {
+  const submit = useCallback(async (requestData) => {
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -13,7 +13,6 @@ export const usePostAPI = (url) => {
         },
         body: JSON.stringify(requestData),
       });
-      console.log("okay")
 
       // Only handle errors here, don't set data state
       if (!response.ok) {
@@ -22,18 +21,18 @@ export const usePostAPI = (url) => {
     } catch (error) {
       throw error; // Re-throw the error to be caught in the component using this hook
     }
-  };
+  }, [url]);
 
-  return { submit };
+  return useMemo(() => ({ submit }), [submit]);
 };
-
 
 // Custom hook for making GET requests
 export const useGetAPI = (url) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  const submit = async () => {
+  const submit = useCallback(async () => {
+    console.log('i am called')
     try {
       const response = await fetch(url, {
         method: 'GET',
@@ -44,19 +43,20 @@ export const useGetAPI = (url) => {
       });
       const responseData = await response.json();
       setData(responseData);
+      console.log(responseData)
     } catch (error) {
       setError(error);
     }
-  };
+  }, [url]);
 
-  return { data, error, submit };
+  return useMemo(() => ({ data, error, submit }), [data, error, submit]);
 };
 
 // Custom hook for making PUT requests
 export const useUpdateAPI = () => {
   const [error, setError] = useState(null);
 
-  const submit = async (url, requestData) => {
+  const submit = useCallback(async (url, requestData) => {
     try {
       const response = await fetch(url, {
         method: 'PUT',
@@ -67,6 +67,7 @@ export const useUpdateAPI = () => {
         },
         body: JSON.stringify(requestData),
       });
+
       // Only handle errors here, don't set data state
       if (!response.ok) {
         throw new Error('Failed to submit data');
@@ -74,16 +75,16 @@ export const useUpdateAPI = () => {
     } catch (error) {
       setError(error);
     }
-  };
+  }, []);
 
-  return { error, submit };
+  return useMemo(() => ({ error, submit }), [error, submit]);
 };
 
 // Custom hook for making DELETE requests
 export const useDeleteAPI = () => {
   const [error, setError] = useState(null);
 
-  const submit = async (url) => {
+  const submit = useCallback(async (url) => {
     try {
       const response = await fetch(url, {
         method: 'DELETE',
@@ -92,6 +93,7 @@ export const useDeleteAPI = () => {
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
         },
       });
+
       // Only handle errors here, don't set data state
       if (!response.ok) {
         throw new Error('Failed to delete data');
@@ -99,7 +101,7 @@ export const useDeleteAPI = () => {
     } catch (error) {
       setError(error);
     }
-  };
+  }, []);
 
-  return { error, submit };
+  return useMemo(() => ({ error, submit }), [error, submit]);
 };
