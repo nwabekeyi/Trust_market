@@ -1,4 +1,3 @@
-// useAuth.js
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { endpoints } from '../constant';
@@ -38,7 +37,7 @@ const deleteCookie = (name) => {
 
 const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const[data, setData] = useState('');
+  const [data, setData] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,73 +50,73 @@ const useAuth = () => {
     }
   }, []);
 
-  const login = async (email, password, url) => {
+  const login = async (values, url) => {
     try {
+      const { email, password } = values; // Destructure email and password from values
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password }), // Ensure correct structure
       });
-  
+
       if (!response.ok) {
         throw new Error('Login failed');
       }
-  
+
       const data = await response.json();
       const { accessToken, refreshToken, expiresIn, userId } = data; // Include userId in the response
       setAccessTokenLocalStorage(accessToken, expiresIn);
       setRefreshTokenCookie(refreshToken);
-  
+
       setIsLoggedIn(true);
       setupTokenRefresh();
-  
+
       // Fetch user info after login
       fetchUserInfo(userId); // Pass the userId to the fetchUserInfo function
     } catch (error) {
       console.error('Login error:', error);
     }
   };
-  
-//fetch user details
-const fetchUserInfo = useCallback(async (userId) => {
-  const userUrl = `${endpoints.getUser}/${userId}`;
 
-  try {
-    const accessToken = getAccessTokenLocalStorage();
-    if (!accessToken) {
-      throw new Error('Access token not found');
+  //fetch user details
+  const fetchUserInfo = useCallback(async (userId) => {
+    const userUrl = `${endpoints.getUser}/${userId}`;
+
+    try {
+      const accessToken = getAccessTokenLocalStorage();
+      if (!accessToken) {
+        throw new Error('Access token not found');
+      }
+
+      const userResponse = await fetch(userUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!userResponse.ok) {
+        throw new Error('Failed to fetch user info');
+      }
+
+      const userData = await userResponse.json();
+      localStorage.setItem('userDetails', JSON.stringify(userData)); // Ensure JSON.stringify here
+      setData(userData);
+      console.log(userData);
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Fetch user info error:', error);
     }
+  }, [navigate]);
 
-    const userResponse = await fetch(userUrl, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    if (!userResponse.ok) {
-      throw new Error('Failed to fetch user info');
-    }
-
-    const userData = await userResponse.json();
-    localStorage.setItem('userDetails', JSON.stringify(userData)); // Ensure JSON.stringify here
-    setData(userData);
-    console.log(userData)
-    navigate('/dashboard');
-  } catch (error) {
-    console.error('Fetch user info error:', error);
-  }
-}, [navigate]);
-
-
-    const logout =  () => {
-      console.log(window.localStorage)
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('accessTokenExpiry');
-      deleteCookie('refreshToken');
-      setIsLoggedIn(false);
-  }
+  const logout = () => {
+    console.log(window.localStorage);
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('accessTokenExpiry');
+    deleteCookie('refreshToken');
+    setIsLoggedIn(false);
+  };
 
   const refreshAccessToken = async () => {
     try {

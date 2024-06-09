@@ -6,9 +6,17 @@ import BestSelling from "./bestSelling";
 
 export const HomeSample = () => {
 
+
+  const closeModal = () =>{
+    return isOpen
+  }
+
+
+
  
   return (
     <div>
+     
      <Hero />
      <CategoryHome/>
      <BestSelling />

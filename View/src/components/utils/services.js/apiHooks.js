@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 
 // Custom hook for making POST requests
+
 export const usePostAPI = (url) => {
   const submit = useCallback(async (requestData) => {
     try {
@@ -8,16 +9,17 @@ export const usePostAPI = (url) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Add authorization header if needed
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
         },
         body: JSON.stringify(requestData),
       });
 
-      // Only handle errors here, don't set data state
+      const responseData = await response.json();
+      
       if (!response.ok) {
-        throw new Error('Failed to submit data');
+        throw new Error(responseData.message || 'Failed to submit data');
       }
+
+      return responseData; // Return response data for further handling in the component
     } catch (error) {
       throw error; // Re-throw the error to be caught in the component using this hook
     }
@@ -25,6 +27,8 @@ export const usePostAPI = (url) => {
 
   return useMemo(() => ({ submit }), [submit]);
 };
+
+
 
 // Custom hook for making GET requests
 export const useGetAPI = (url) => {

@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChildrenPropForm, TextField } from '../../../FormTemplate';
 import * as Yup from 'yup';
 import { useLocation } from 'react-router-dom';
 import { endpoints } from '../../../utils/constant';
-import { usePostAPI } from '../../../utils/services.js/apiHooks';
+import Modal from '../../../modalTemplate';
 
 export function SignUpForm() {
   const location = useLocation().pathname;
   const registerUrl =
     location === '/auth2/buyer-register' ? endpoints.buyerRegister : endpoints.sellerRegister;
 
-  const { submit: postSubmit } = usePostAPI(registerUrl);
-
   // Form state
-  const [formValues, setFormValues] = useState({
+  const formValues = {
     email: '',
     userName: '',
     password: '',
     confirmPassword: '',
     phone_number: '',
-  });
+  };
+
+  console.log(registerUrl);
 
   // Validation schema for form fields
   const validationSchema = Yup.object().shape({
@@ -33,16 +33,6 @@ export function SignUpForm() {
       .matches(/^\d+$/, 'Invalid phone number')
       .required('Phone number is required'),
   });
-
-  // Handle form submission
-  const handleSubmit = async (values, { resetForm }) => {
-    try {
-      await postSubmit(values);
-      resetForm();
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
-  };
 
   // Determine the title based on the location
   const title =
@@ -60,19 +50,17 @@ export function SignUpForm() {
             <ChildrenPropForm
               initialValues={formValues}
               validationSchema={validationSchema}
-              onSubmit={handleSubmit}
+              url={registerUrl} // Pass the URL here
               title={title}
-              values={setFormValues}
               title2={'Explore the most secured marketplace '}
               register
+              modal
             >
               <TextField label="Email" name="email" type="email" style={{ textAlign: 'left' }} />
               <TextField label="Username" name="userName" type="text" style={{ textAlign: 'left' }} />
               <TextField label="Password" name="password" type="password" style={{ textAlign: 'left' }} />
               <TextField label="Confirm Password" name="confirmPassword" type="password" style={{ textAlign: 'left' }} />
               <TextField label="Phone Number" name="phone_number" type="text" style={{ textAlign: 'left' }} />
-
-              {/* Optionally, render any error message here */}
             </ChildrenPropForm>
           </div>
         </div>

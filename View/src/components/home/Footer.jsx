@@ -72,8 +72,8 @@ const Footer =  () =>{
              <div  key={index}>
                 <h2 className='text-greyLighter text-md lg:text-xl font-bold mb-1  lg:mb-4 '>{category.title}</h2>
                     <ul className='text-white'>
-                    {category.items.map((item, i) => (
-                        <p><li key={i} className='text-greyLighter text-[8px] lg:text-xs mt-1 font-weight-[light] hover:text-red cursor-pointer duration-200'>{item}</li> </p>
+                    {category.items.map((item, index) => (
+                        <p><li key={index} className='text-greyLighter text-[8px] lg:text-xs mt-1 font-weight-[light] hover:text-red cursor-pointer duration-200'>{item}</li> </p>
                         ))}
                     </ul>
             </div>

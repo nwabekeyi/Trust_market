@@ -5,7 +5,7 @@ const user = import.meta.env.LOGIN_GETUSER;
 console.log(adminEndpoint);
 
 // Base URL
-const baseURL = 'https://trust-market-8.onrender.com';
+const baseURL = 'https://trust-market-9.onrender.com';
 
 // Endpoints
 const endpoints = {
