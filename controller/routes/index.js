@@ -18,6 +18,11 @@ const {
         getAllUser
         } = require("./getUsers");
 
+        const postProduct = require('./postProduct');
+        const getAllProducts = require('./getProduct/getAllProducts');
+        const getOneProduct = require('./getProduct/getOneProduct')
+
+
 module.exports = {
     registerAdmin,
     registerBuyer,
@@ -30,5 +35,8 @@ module.exports = {
     refreshToken,
     logoutUser,
     getUser,
-    getAllUser
+    getAllUser,
+    postProduct,
+    getAllProducts,
+    getOneProduct
 };

@@ -18,7 +18,10 @@ const {
     refreshToken,
     logoutUser,
     getUser,
-    getAllUser
+    getAllUser,
+    postProduct,
+    getAllProducts,
+    getOneProduct
 } = require("./routes");
 
 const app = express();
@@ -72,6 +75,10 @@ app.use(refreshToken);
 app.use(logoutUser);
 app.use(getAllUser);
 app.use(getUser);
+app.use(postProduct);
+app.use(getAllProducts);
+app.use(getOneProduct);
+
 
 
 // Route to serve the index.html file
