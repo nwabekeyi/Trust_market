@@ -1,16 +1,22 @@
 const path = require('path');
+const fs = require('fs');
 const { GenerateSW } = require('workbox-webpack-plugin');
 
-class AddJsxExtensionPlugin {
-  apply(resolver) {
-    resolver.getHook('resolve').tapAsync('AddJsxExtensionPlugin', (request, resolveContext, callback) => {
-      const newRequest = Object.assign({}, request);
-      if (!path.extname(newRequest.request)) {
-        newRequest.request += '.jsx';
-      }
-      resolver.doResolve('resolve', newRequest, null, resolveContext, callback);
-    });
-  }
+// Function to process imports and add .jsx extension if necessary
+function addJsxExtension(source) {
+  const importsRegex = /import\s+.*\s+from\s+['"](.*)['"];?/g;
+  return source.replace(importsRegex, (match, importPath) => {
+    const resolvedPath = path.resolve(path.dirname(this.resourcePath), importPath);
+    if (!path.extname(importPath) && fs.existsSync(`${resolvedPath}.jsx`)) {
+      return match.replace(importPath, `${importPath}.jsx`);
+    }
+    return match;
+  });
+}
+
+// Custom loader
+function customLoader(source) {
+  return addJsxExtension.call(this, source);
 }
 
 module.exports = (env, argv) => {
@@ -24,14 +30,19 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.jsx$/,
+          test: /\.jsx?$/, // Handle both .js and .jsx files
           exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
+          use: [
+            {
+              loader: path.resolve(__dirname, 'custom-loader.js'), // Use the custom loader inline
             },
-          },
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+              },
+            },
+          ],
         },
         {
           test: /\.css$/, // Add loader for CSS files
@@ -40,15 +51,12 @@ module.exports = (env, argv) => {
       ],
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.css', ''], // Include empty string to resolve files without extensions
+      extensions: ['.js', '.jsx', '.css'], // Include extensions
       mainFiles: ['index'], // Ensure main files like index.js are resolved
       alias: {
         '@Routes': path.resolve(__dirname, 'src/components/Routes'),
         '@context': path.resolve(__dirname, 'src/context/context'),
       },
-      plugins: [
-        new AddJsxExtensionPlugin(), // Add custom resolver plugin
-      ],
     },
     plugins: [
       new GenerateSW({
@@ -57,7 +65,7 @@ module.exports = (env, argv) => {
         navigateFallback: '/index.html',
         runtimeCaching: [
           {
-            urlPattern: ({ request, url }) => request.destination === 'image',
+            urlPattern: ({ request }) => request.destination === 'image',
             handler: 'CacheFirst',
             options: {
               cacheName: 'image-cache',
