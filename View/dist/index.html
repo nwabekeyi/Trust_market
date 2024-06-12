@@ -10,7 +10,22 @@
     <title>Trust Market</title>
     <script type="module" crossorigin src="/assets/index-VTyqXAS6.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-XmJo4xs-.css">
-  <link rel="manifest" href="/manifest.webmanifest"></head>
+  <link rel="manifest" href="/manifest.webmanifest">
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('Service Worker registered:', registration);
+          })
+          .catch(error => {
+            console.error('Service Worker registration failed:', error);
+          });
+      });
+    }
+  </script>
+  </head>
   <body>
     <div id="root"></div>
   </body>
