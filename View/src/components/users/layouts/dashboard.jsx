@@ -6,10 +6,10 @@ import {
   DashboardNavbar,
   Configurator,
   Footer,
-} from "../widgets/layout";
+} from "../widgets/layout/index";
 import routes from "../routes";
-import { useMaterialTailwindController, setOpenConfigurator } from "../../../context";
-import { DashboardHome } from "../pages/dashboard";
+import { useMaterialTailwindController, setOpenConfigurator } from "../../../context/context";
+import { DashboardHome } from "../pages/dashboard/index";
 
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();

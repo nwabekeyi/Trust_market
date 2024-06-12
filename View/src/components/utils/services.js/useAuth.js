@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { endpoints } from '../constant';
+import { endpoints } from '../constant.js';
 
 const setAccessTokenLocalStorage = (accessToken, expiresIn) => {
   const expiryTime = new Date().getTime() + expiresIn * 1000; // expiresIn is in seconds

@@ -1,6 +1,6 @@
 import './App.css'
-import MyRoutes from './components/Routes'
-import { MaterialTailwindControllerProvider } from "./context";
+import MyRoutes from "@Routes"
+import { MaterialTailwindControllerProvider } from "@context";
 import { ThemeProvider } from "@material-tailwind/react";
 
 function App() {

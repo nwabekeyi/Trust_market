@@ -60,8 +60,14 @@ app.use(cookieParser());
 const staticFilesDir = path.join(__dirname, '../View/dist');
 
 // Serve static files from the directory containing index.html
-app.use(express.static(staticFilesDir));
-
+app.use(express.static(staticFilesDir, {
+    etag: true, // Enable ETag generation
+    lastModified: true, // Enable Last-Modified header
+    setHeaders: (res, path) => {
+        const cacheControl = 'public, max-age=31536000'; // Cache for 1 year
+        res.setHeader('Cache-Control', cacheControl);
+    }
+}));
 // Routes
 app.use(registerSuperadmin);
 app.use(registerAdmin);

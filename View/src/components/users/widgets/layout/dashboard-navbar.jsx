@@ -24,7 +24,7 @@ import {
   useMaterialTailwindController,
   setOpenConfigurator,
   setOpenSidenav,
-} from "../../../../context";
+} from "../../../../context/context";
 import  useAuth  from "../../../utils/services.js/useAuth";
 import {endpoints} from "../../../utils/constant"
 

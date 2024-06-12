@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import Dropdown from '../../Dropdown';
 import { Navigate } from 'react-router-dom';
 import { MdOutlineShoppingBag } from "react-icons/md";
-import MobileNavbar from "../../mobileNav";
+import MobileNavbar from "../../mobileNav/index";
 import Footer from "../../home/Footer";
 
 // Define the higher-order component
