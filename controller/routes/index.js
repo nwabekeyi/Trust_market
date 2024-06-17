@@ -21,6 +21,7 @@ const {
         const postProduct = require('./postProduct');
         const getAllProducts = require('./getProduct/getAllProducts');
         const getOneProduct = require('./getProduct/getOneProduct')
+        const productRating = require('./postProduct/productRating')
 
 
 module.exports = {
@@ -38,5 +39,6 @@ module.exports = {
     getAllUser,
     postProduct,
     getAllProducts,
-    getOneProduct
+    getOneProduct,
+    productRating
 };

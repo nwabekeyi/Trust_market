@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+const reviewSchema = new mongoose.Schema({
+    rating: { type: Number, min: 1, max: 5 },
+    review: { type: String },
+});
+
 const productSchema = new mongoose.Schema({
     name: { type: String, required: true },
     category: { type: String, required: true },
@@ -16,10 +21,11 @@ const productSchema = new mongoose.Schema({
     additionalInfo: { type: Object },
     condition: { type: String, required: true },
     seller: { type: String, required: true },
-    rating: { type: Number, min: 0, max: 5, default: 0 }, // Rating with a range of 0-5
-    productReview: { type: String }, // Optional product review as a string
-    totalSales: { type: Number, default: 0 }, // Total number of sales, default to 0
-    sellingIndex: { type: Number, default: 0 } // New field for product selling index
+    rating: { type: Number, min: 0, max: 5, default: 0 },
+    ratingCount: { type: Map, of: Number, default: {} },
+    totalSales: { type: Number, default: 0 },
+    sellingIndex: { type: Number, default: 0 },
+    reviews: [reviewSchema], // Add reviews array to the schema
 });
 
 const Product = mongoose.model('Product', productSchema);

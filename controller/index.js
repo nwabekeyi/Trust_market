@@ -21,7 +21,8 @@ const {
     getAllUser,
     postProduct,
     getAllProducts,
-    getOneProduct
+    getOneProduct,
+    productRating
 } = require("./routes");
 
 const app = express();
@@ -84,6 +85,7 @@ app.use(getUser);
 app.use(postProduct);
 app.use(getAllProducts);
 app.use(getOneProduct);
+app.use(productRating)
 
 
 // Route to serve the index.html file
@@ -101,7 +103,7 @@ if (cluster.isMaster) {
     }
 
     // Listen for when a worker exits
-    cluster.on('exit', (worker, code, signal) => {
+    cluster.on('exit', (worker) => {
         console.log(`Worker ${worker.process.pid} died`);
         // Fork a new worker to replace the one that died
         cluster.fork();

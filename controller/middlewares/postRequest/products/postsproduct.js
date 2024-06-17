@@ -1,9 +1,9 @@
 const multer = require('multer');
 const fs = require('fs').promises;
 const { Dropbox } = require('dropbox');
-const Product = require('../../model/dbSchema/product');
-const { Seller } = require('../../model/dbSchema/User');
-const { loadTokens, refreshAccessToken, saveTokens } = require('../../model/dbSchema/dBoxToken'); // Adjust the path to your token functions
+const Product = require('../../../model/dbSchema/product');
+const { Seller } = require('../../../model/dbSchema/User');
+const { loadTokens, refreshAccessToken, saveTokens } = require('../../../model/dbSchema/dBoxToken'); // Adjust the path to your token functions
 
 // Configure multer to save files to 'uploads' directory (if needed)
 const upload = multer({ dest: 'uploads/' });
@@ -61,24 +61,12 @@ const postProduct = async (req, res) => {
         const keyFeaturesArray = keyFeatures ? keyFeatures.split(',').map((feature) => feature.trim()) : [];
         const colorOptionsArray = colorOptions ? colorOptions.split(',').map((color) => color.trim()) : [];
 
-        // Calculate average rating of all products
-        const allProducts = await Product.find({});
-        let totalRating = 0;
-        allProducts.forEach(product => {
-            totalRating += product.rating;
-        });
-        const averageRating = allProducts.length > 0 ? totalRating / allProducts.length : 0;
-
-        // Calculate selling index
-        const productRating = averageRating; // Use average rating for calculation
-        const sellingIndex = (Math.pow(productRating, 2) * 2) / 100;
-
         // Create a new Product object
         const newProduct = new Product({
             name,
             category,
             subCategory,
-            seller: sellerId, // Store seller ID
+            seller,
             price,
             stock,
             description,
@@ -89,9 +77,7 @@ const postProduct = async (req, res) => {
             additionalInfo: parsedAdditionalInfo,
             colorOptions: colorOptionsArray,
             pictures: pictureUrlsToStore, // Store URLs of uploaded images
-            condition,
-            rating: productRating,
-            sellingIndex
+            condition
         });
 
         // Save the new product to the database

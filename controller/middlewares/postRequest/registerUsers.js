@@ -1,9 +1,9 @@
-const {Seller, Buyer, Admin} = require('../../model/dbSchema/User');
+const { Seller, Buyer, Admin } = require('../../model/dbSchema/User');
 const bcrypt = require('bcrypt');
 
 // buyer registration logic
 const registerBuyer = async (req, res) => {
-    const { email, userName, password, confirmPassword, phone_number } = req.body;
+    const { email, userName, password, confirmPassword, phone_number, country, city } = req.body;
     console.log(req.body);
 
     if (password !== confirmPassword) {
@@ -26,6 +26,8 @@ const registerBuyer = async (req, res) => {
             userName,
             password: hashedPassword,
             phone_number,
+            country,
+            city,
             role: 'buyer',
         });
 
@@ -43,7 +45,7 @@ const registerBuyer = async (req, res) => {
 
 // seller registration logic
 const registerSeller = async (req, res) => {
-    const { email, userName, password, confirmPassword, phone_number } = req.body;
+    const { email, userName, password, confirmPassword, phone_number, country, city } = req.body;
     console.log(req.body);
 
     if (password !== confirmPassword) {
@@ -60,17 +62,19 @@ const registerSeller = async (req, res) => {
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create a new admin
+        // Create a new seller
         const newSeller = new Seller({
             email,
             userName,
             password: hashedPassword,
             phone_number,
+            country,
+            city,
             role: 'seller',
         });
 
         await newSeller.save();
-        return res.status(201).json({ message: `user registered successfully.`, user: newSeller });
+        return res.status(201).json({ message: `User registered successfully.`, user: newSeller });
     } catch (error) {
         // Check for specific errors and provide appropriate error messages
         if (error.name === 'ValidationError') {
@@ -110,7 +114,7 @@ const registerAdmin = async (req, res) => {
         });
 
         await newAdmin.save();
-        return res.status(201).json({ message: `user registered successfully.`, user: newAdmin });
+        return res.status(201).json({ message: `User registered successfully.`, user: newAdmin });
     } catch (error) {
         // Check for specific errors and provide appropriate error messages
         if (error.name === 'ValidationError') {
@@ -140,7 +144,6 @@ const registerSuperadmin = async (req, res) => {
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-
         // Create a new superadmin
         const newSuperadmin = new Admin({
             email,
@@ -151,7 +154,7 @@ const registerSuperadmin = async (req, res) => {
         });
 
         await newSuperadmin.save();
-        return res.status(201).json({ message: `user registered successfully.`, user: newSuperadmin });
+        return res.status(201).json({ message: `User registered successfully.`, user: newSuperadmin });
     } catch (error) {
         // Check for specific errors and provide appropriate error messages
         if (error.name === 'ValidationError') {
@@ -162,5 +165,4 @@ const registerSuperadmin = async (req, res) => {
     }
 };
 
-module.exports = { registerAdmin, registerBuyer, registerSeller, registerSuperadmin};
-
+module.exports = { registerAdmin, registerBuyer, registerSeller, registerSuperadmin };
