@@ -6,7 +6,7 @@ const { Buyer, Seller } = require('./dbSchema/User');
 // MongoDB connection
 const connectToMongoDB = async () => {
     try {
-        await mongoose.connect("mongodb+srv://nwabekeyi:customized13@main.ltd8d4p.mongodb.net/mainDB?retryWrites=true&w=majority&appName=main");
+        await mongoose.connect("");
         console.log('MongoDB connected successfully');
 
         // Call the function to update existing documents
