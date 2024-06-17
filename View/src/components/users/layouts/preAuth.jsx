@@ -21,12 +21,12 @@ const Auth = ({ SignIn, children }) => {
         sellerSign: "Login as a seller",
     };
 
-    const buttonStyle = "block shadow-md drop-shadow-lg py-5 px-10 flex justify-center items-center w-[300px] hover:text-red active:bg-grey active:text-white border-[1px] mt-10 border-[solid] border-greyLighter rounded-md hover:bg-greyLighter"
+    const buttonStyle = "block shadow-md drop-shadow-lg py-5 px-10 flex justify-center items-center w-[300px] hover:text-white active:bg-greylighter active:text-white border-[1px] mt-10 border-[solid] border-greyLighter rounded-md hover:bg-greyLighter"
 
   return (
 
-    <div className="container flex items-center justify-center mx-auto py-8 ">
-        <div className="px-10 py-16 shadow rounded-lg border-[1px] mt-10 border-[solid] border-greyLighter">
+    <div className="grid place-content-center h-[80vh]">
+        <div className="px-10 py-16 md:shadow-xl rounded-lg bg-white">
         <h2 className="text-red text-center">Are you a buyer or a seller?</h2>
            <div className="space-y-5">
            <button onClick={handleSignInBuyer} className={buttonStyle}> <FaPeopleCarry className="mr-2" />
@@ -37,7 +37,7 @@ const Auth = ({ SignIn, children }) => {
             </button>
            </div>
         </div>
-        {children  && React.cloneElement(children, { ...props })}
+            {children  && React.cloneElement(children, { ...props })}
     </div>
   );
 };

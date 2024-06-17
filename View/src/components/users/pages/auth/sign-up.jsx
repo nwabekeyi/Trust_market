@@ -39,7 +39,7 @@ export function SignUpForm() {
     location === '/auth2/seller-register' ? 'Hi, welcome seller' : 'Hi, welcome to the best marketplace';
 
   return (
-    <section className="w-full py-10 lg:w-2/5 border-[solid] border-[1px] border-greyLighter flex flex-col py-2 items-center justify-center rounded-[20px] bg-white shadow-lg mx-auto">
+    <section className="w-full h-[100vh] lg:h-[auto] py-10 lg:w-2/5 border-[solid] border-[1px] border-greyLighter flex flex-col py-2 items-center justify-center rounded-[20px] bg-white shadow-lg mx-auto">
       <div className="w-4/5 mx-auto">
         <div className="text-center">
           <h1 className="text-3xl text-greyLight font- mb-1" style={{ fontFamily: 'markazi' }}>

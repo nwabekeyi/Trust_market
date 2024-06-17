@@ -1,81 +1,37 @@
 const Product = require('../../model/dbSchema/product');
-const { Dropbox } = require('dropbox');
 
-const dbx = new Dropbox({ accessToken: process.env.DROPBOX_ACCESS_TOKEN });
-
+// Middleware to get all products
 const getAllProducts = async (req, res) => {
     try {
-        // Fetch all products from the database
         const products = await Product.find();
-
-        // Map over each product to add Dropbox URLs for images
-        const productsWithUrls = await Promise.all(products.map(async (product) => {
-            const productWithUrl = { ...product.toObject() }; // Create a copy of the product object
-            // Fetch Dropbox URLs for each image and add them to the product object
-            productWithUrl.pictures = await Promise.all(product.pictures.map(async (picture) => {
-                try {
-                    const result = await dbx.sharingCreateSharedLinkWithSettings({
-                        path: picture,
-                        settings: {
-                            requested_visibility: 'public' // Set the link visibility to public
-                        }
-                    });
-                    return result.url; // Store the permanent Dropbox URL for the image
-                } catch (error) {
-                    console.error('Error fetching Dropbox URL:', error);
-                    return null; // Handle error by returning null for the URL
-                }
-            }));
-            return productWithUrl;
-        }));
-
-        // Return the products with Dropbox URLs as JSON response
-        res.status(200).json(productsWithUrls);
+        res.status(200).json(products);
     } catch (error) {
-        console.error(error);
-        // Return error response if fetching products fails
-        res.status(500).json({ error: 'Failed to fetch products' });
+        console.error('Error fetching products:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 
-const getOneProduct = async (req, res) => {
+// Middleware to get a single product by ID
+const getProductById = async (req, res) => {
     try {
-        // Extract the product ID from the URL parameter
-        const productId = req.params.productId;
+        const productId = req.params.id;
+        console.log(req.params);
 
-        // Fetch the product from the database using the product ID
         const product = await Product.findById(productId);
+        console.log('Product found:', product); // Log the product object
 
-        // If the product is not found, return 404 Not Found
         if (!product) {
             return res.status(404).json({ error: 'Product not found' });
         }
 
-        // Map over each image to add Dropbox URLs
-        const productWithUrls = { ...product.toObject() }; // Create a copy of the product object
-        productWithUrls.pictures = await Promise.all(product.pictures.map(async (picture) => {
-            try {
-                const result = await dbx.sharingCreateSharedLinkWithSettings({
-                    path: picture,
-                    settings: {
-                        requested_visibility: 'public' // Set the link visibility to public
-                    }
-                });
-                return result.url; // Store the permanent Dropbox URL for the image
-            } catch (error) {
-                console.error('Error fetching Dropbox URL:', error);
-                return null; // Handle error by returning null for the URL
-            }
-        }));
-
-        // Return the product with Dropbox URLs as JSON response
-        res.status(200).json(productWithUrls);
+        res.status(200).json(product);
     } catch (error) {
-        console.error(error);
-        // Return error response if fetching product fails
-        res.status(500).json({ error: 'Failed to fetch product details' });
+        console.error('Error fetching product:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-}
+};
 
-
-module.exports = {getAllProducts, getOneProduct}
+module.exports = {
+    getAllProducts,
+    getProductById
+};

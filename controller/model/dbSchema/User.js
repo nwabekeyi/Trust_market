@@ -18,13 +18,16 @@ buyerSchema.virtual('createdAtFormatted').get(function() {
 
 //seller
 const sellerSchema = new mongoose.Schema({
-    email: { type: String, required: true},
-    userName: { type: String, required: true},
+    email: { type: String, required: true },
+    userName: { type: String, required: true },
     password: { type: String, required: true },
     phone_number: { type: String, required: true },
-    confirmPassword: { type: String},
-    role: { type: String, enum: ['seller'] },
-    createdAt: { type: Date, default: Date.now }
+    confirmPassword: { type: String },
+    role: { type: String, enum: ['seller'], default: 'seller' },
+    createdAt: { type: Date, default: Date.now },
+    rating: { type: Number, default: 0 },
+    numberOfSales: { type: Number, default: 0, min: 0, max: 5},
+    numberOfRatings: { type: Number, default: 0 }
 });
 
 // Virtual property to format createdAt date

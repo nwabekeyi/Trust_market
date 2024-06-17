@@ -37,12 +37,12 @@ const MyRoutes = () => {
             </Suspense>
           }
         />
-        <Route exact path="/" element={<Suspense fallback={<AuthIsloading/>}>
+        <Route exact path="/home" element={<Suspense fallback={<AuthIsloading/>}>
               {isLoggedIn ? <Dashboard/> : <MainHome />}
             </Suspense>
           }
         />
-        <Route exact path="/home" element={isLoggedIn ? <Dashboard/> : <MainHome/>} />
+        <Route exact path="/" element={isLoggedIn ? <Dashboard/> : <MainHome/>} />
 
       <Route path="/dashboard" element={<Suspense fallback={AuthIsloading}>
               <Dashboard/>

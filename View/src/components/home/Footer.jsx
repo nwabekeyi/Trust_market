@@ -82,7 +82,7 @@ const Footer =  () =>{
                 {/* Newsletter form */}
             <div className="w-1/3">
 
-                <h2 className='text-white text-xl font-bold  mb-4'>Subscribe for Newsletter</h2>
+                <h2 className='text-greyLighter text-xl font-bold  mb-4 text-center'>Subscribe for Newsletter</h2>
                     <ChildrenPropForm
                     initialValues={{  email: '', }}
                          validationSchema={validationSchema}

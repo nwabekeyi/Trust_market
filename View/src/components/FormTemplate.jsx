@@ -89,7 +89,7 @@ const ChildrenPropForm = ({
                 {register ? (
                   <p className="text-center text-greyLight text-sm font-medium mt-4">
                     Already have an account?
-                    <Link to="/auth/sign-in" className="text-red hover:text-greyLight ml-1">Sign in</Link>
+                    <Link to="/auth1" className="text-red hover:text-greyLight ml-1">Sign in</Link>
                   </p>
                 ) : (
                   <p className="text-center text-greyLight text-sm font-medium mt-4">

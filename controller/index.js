@@ -86,7 +86,6 @@ app.use(getAllProducts);
 app.use(getOneProduct);
 
 
-
 // Route to serve the index.html file
 app.get('*', (req, res) => {
     res.sendFile(path.join(staticFilesDir, 'index.html'));

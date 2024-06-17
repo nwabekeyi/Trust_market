@@ -21,6 +21,13 @@ module.exports = withMT({
        greyLight: '#403C39',
        greyLighter: '#B0B0B0',
       },
+      screens:{
+        "xs" : "320px",
+        "sm" : "375px",
+        "md" : "768px",
+        "lg" : "1024px",
+        "xl" : "1440px",
+      }
     },
   },
   plugins: [],

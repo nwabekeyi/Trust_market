@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import MobileNavbar from "../../mobileNav/index";
 import Footer from "../../home/Footer";
+import bg from "../../../assets/auth-bg.jpg"
 
 // Define the higher-order component
 const NavWrapper = (WrappedComponent) => {
@@ -37,6 +38,13 @@ const NavWrapper = (WrappedComponent) => {
     const handleLoginNav = () =>{
       navigate('auth2')
     }
+
+    //navigate home
+    const navigateHome = () =>{
+      navigate('/')
+    }
+
+
     // Sample function to update the cart item count
     const updateCartItemCount = (count) => {
       setCartItemCount(count);
@@ -48,8 +56,10 @@ const NavWrapper = (WrappedComponent) => {
     }
     const sellRoute = isLoggedIn ? "/dashboard" : "auth1/seller-sign-in";
     const buyRoute = isLoggedIn ? "/dashboard" : "/auth1/buyer-sign-in";
+
+    
     return (
-      <div>
+      <div >
 
         { (
           location === "/"
@@ -60,11 +70,10 @@ const NavWrapper = (WrappedComponent) => {
         )
         ?
         <div>
-        {/* <MobileNav /> */}
         <header className="hidden lg:block">
         <nav className=" flex justify-between items-center bg-white py-4  lg:px-[30px] h-[80px] my-0 ">
           <div className="flex items-center">
-        <NavLink to="/" className="text-3xl text-red cursor">Trust <span className="text-yellow">Market</span></NavLink>
+        <NavLink onClick={navigateHome} className="text-3xl text-red cursor">Trust <span className="text-yellow">Market</span></NavLink>
       </div>
           {/* Navigation Links */}
           <div className="flex space-x-[-50px] justify-evenly flex-grow">
@@ -111,15 +120,15 @@ const NavWrapper = (WrappedComponent) => {
       // navbar for authpages
       :
        <div>
-       <nav className="flex h-[50px] justify-between shadow items-center bg-white text-white px-10 ">
+       <nav className="flex h-[50px] justify-between shadow items-center bg-white text-white px-5 lg:px-10 ">
         <div className="flex items-center">
             {/* Logo */}
                 <Link to= "/" className="text-xl text-red cursor ">Trust <span className="text-yellow">Market</span></Link>
             </div>
             {location === '/auth2' ?
             <div className='text-grey'>
-              <h2 className='text-[10px]'> Already have an acouunt? <Link className='text-red underline hover:text-greyLight'>Login</Link> </h2>
-              <Link className='text-[10px] hover:text-red'>Forget your user ID or password?</Link>
+              <h2 className='text-xs md:text-[12px]'> Already have an acouunt? <Link to="/auth1" className='text-red underline hover:text-greyLight'>Login</Link> </h2>
+              <Link className='text-xs md:text-[12px] hover:text-red'>Forget your user ID or password?</Link>
               </div>
               :
               <div className='flex'>
