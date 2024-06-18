@@ -17,7 +17,7 @@ export function StatisticsCard({ color, icon, title, value, footer }) {
         shadow={false}
         className="absolute grid h-12 w-12 place-items-center"
       >
-        {icon}
+        <icon/>
       </CardHeader>
       <CardBody className="p-4 text-right">
         <Typography variant="small" className="font-normal text-blue-gray-600">

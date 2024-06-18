@@ -9,7 +9,7 @@ export const statisticsCardsData = [
   {
     color: "gray",
     icon: BanknotesIcon,
-    title: "Today's Money",
+    title: "Revenue",
     value: "$53k",
     footer: {
       color: "text-green-500",
@@ -31,7 +31,7 @@ export const statisticsCardsData = [
   {
     color: "gray",
     icon: UserPlusIcon,
-    title: "New Clients",
+    title: "New Users",
     value: "3,462",
     footer: {
       color: "text-red-500",
@@ -42,12 +42,34 @@ export const statisticsCardsData = [
   {
     color: "gray",
     icon: ChartBarIcon,
-    title: "Sales",
-    value: "$103,430",
+    title: "Listings",
+    value: "430",
     footer: {
       color: "text-green-500",
       value: "+5%",
       label: "than yesterday",
+    },
+  },
+  {
+    color: "gray",
+    icon: ChartBarIcon,
+    title: "Orders",
+    value: "1,430",
+    footer: {
+      color: "text-red",
+      value: "+5%",
+      label: "than yesterday",
+    },
+  },
+  {
+    color: "gray",
+    icon: ChartBarIcon,
+    title: "Concerns",
+    value: "30",
+    footer: {
+      color: "text-red",
+      value: "-5%",
+      label: "less yesterday",
     },
   },
 ];

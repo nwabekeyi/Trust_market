@@ -7,10 +7,10 @@ body, h1 {
   font-family: 'Montserrat', sans-serif;
 }
 
-h2, h3, .link {
+h2, h3, .link, .poppinns {
   font-family: 'Poppins', sans-serif;
 }
 
-  p, h4, h5 {
+  p, h4, h5, .arial {
     font-family: Arial, sans-serif;
   }

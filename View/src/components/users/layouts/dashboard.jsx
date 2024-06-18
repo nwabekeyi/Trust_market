@@ -5,11 +5,11 @@ import {
   Sidenav,
   DashboardNavbar,
   Configurator,
-  Footer,
 } from "../widgets/layout/index";
 import routes from "../routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "../../../context/context";
 import { DashboardHome } from "../pages/dashboard/index";
+import FooterLoggedIn from "../../footers/footerLoggedIn";
 
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -46,7 +46,7 @@ export function Dashboard() {
           )}
         </Routes>
         <div className="text-blue-gray-600">
-          <Footer />
+          <FooterLoggedIn />
         </div>
       </div>
     </div>

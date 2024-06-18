@@ -25,7 +25,6 @@ import {
   setOpenConfigurator,
   setOpenSidenav,
 } from "../../../../context/context";
-import  useAuth  from "../../../utils/services.js/useAuth";
 import {endpoints} from "../../../utils/constant"
 
 export function DashboardNavbar() {
@@ -33,15 +32,12 @@ export function DashboardNavbar() {
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
-  const{logout} = useAuth();
 // 
 const data = localStorage.getItem('userDetails');
 const parsedData = data ? JSON.parse(data) : null;
 const userName = parsedData?.userDetails?.userName || "Guest";
 
-const handleLogout = () =>{
-  logout()  ;
-}
+
 
   return (
     <Navbar
@@ -55,45 +51,41 @@ const handleLogout = () =>{
       blurred={fixedNavbar}
     >
       <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
-        <div className="capitalize">
+      <div className="capitalize hidden md:block">
           <Breadcrumbs
             className={`bg-transparent p-0 transition-all ${
               fixedNavbar ? "mt-1" : ""
             }`}
           >
-            <p>Welcome {userName}</p>            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {page}
-            </Typography>
+            <p className=" pl-2 poppins text-lg lg:text-xl">Welcome <span className="text-red font-semibold text-xl lg:text-2xl">{userName}</span></p>            
           </Breadcrumbs>
-          <Typography variant="h6" color="blue-gray">
-            {page}
-          </Typography>
         </div>
-        <div className="flex items-center">
-          <div className="mr-auto md:mr-4 md:w-56">
+      <div className="mr-auto w-full md:mr-4 md:w-56 md:hidden">
             <Input label="Search" />
-          </div>
-          <IconButton
-            variant="text"
-            color="blue-gray"
-            className="grid xl:hidden"
-            onClick={() => setOpenSidenav(dispatch, !openSidenav)}
+      </div>
+        <div className="flex items-center justify-between">
+        <div className="capitalize md:hidden">
+          <Breadcrumbs
+            className={`bg-transparent p-0 transition-all ${
+              fixedNavbar ? "mt-1" : ""
+            }`}
           >
-            <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
-          </IconButton>
-          <Link to='/auth1'>
+            <p className=" pl-2 poppins text-sm">Welcome <span className="text-red font-semibold text-lg">{userName}</span></p>            
+          </Breadcrumbs>
+        </div>
+
+        <div className=" hidden md:block mr-auto w-full md:mr-4 md:w-56">
+            <Input label="Search" />
+      </div>
+          
+         <div className="flex flex-endz">
+        
             <Button
-            onClick={handleLogout}
               variant="text"
               color="blue-gray"
-              className="hidden items-center gap-1 px-4 xl:flex normal-case"
+              className="hidden items-center gap-1 px-4 xl:flex normal-case mr-[-100px]"
             >
               <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
-              Sign Out
             </Button>
             <IconButton
               variant="text"
@@ -102,7 +94,6 @@ const handleLogout = () =>{
             >
               <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
             </IconButton>
-          </Link>
           <Menu>
             <MenuHandler>
               <IconButton variant="text" color="blue-gray">
@@ -188,6 +179,16 @@ const handleLogout = () =>{
           >
             <Cog6ToothIcon className="h-5 w-5 text-blue-gray-500" />
           </IconButton>
+
+          <IconButton
+            variant="text"
+            color="blue-gray"
+            className="grid xl:hidden"
+            onClick={() => setOpenSidenav(dispatch, !openSidenav)}
+          >
+            <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
+          </IconButton>
+         </div>
         </div>
       </div>
     </Navbar>

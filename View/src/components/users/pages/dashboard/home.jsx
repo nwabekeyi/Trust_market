@@ -28,19 +28,20 @@ import {
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
 
 export function DashboardHome() {
+
   
   return (
-    <div className="mt-12">
+    <div className="mt-3">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
         {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
           <StatisticsCard
             key={title}
             {...rest}
             title={title}
-            // icon={yyt}
+            icon={icon}
             footer={
               <Typography className="font-normal text-blue-gray-600">
-                <strong className={footer.color}>{footer.value}</strong>
+                <strong className="text-red">{footer.value}</strong>
                 &nbsp;{footer.label}
               </Typography>
             }

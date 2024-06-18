@@ -8,7 +8,7 @@ import Dropdown from '../../Dropdown';
 import { Navigate } from 'react-router-dom';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import MobileNavbar from "../../mobileNav/index";
-import Footer from "../../home/Footer";
+import Footer from "../../footers/Footer";
 import bg from "../../../assets/auth-bg.jpg"
 
 // Define the higher-order component
